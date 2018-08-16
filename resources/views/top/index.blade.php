@@ -16,13 +16,8 @@
     @foreach($artists as $artist)
     	<p>{{ $artist->name }}</p>
     @endforeach
+    <input type="submit" class="btn btn-deafult">
 @endsection
- 
-@include('layouts.sub')
- 
-@section('pageSub')
-    <p>個別サイドバーの内容</p>
-@endsectionehhq
  
 @section('pageJs')
 <script src="/js/page.js"></script>
