@@ -13,6 +13,9 @@
  
 @section('content')
     <p>コンテンツ内容が入ります</p>
+    @foreach($artists as $artist)
+    	<p>{{ $artist->name }}</p>
+    @endforeach
 @endsection
  
 @include('layouts.sub')
