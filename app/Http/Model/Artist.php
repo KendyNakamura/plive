@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Model;
+namespace Plive\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
