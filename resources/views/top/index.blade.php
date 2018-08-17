@@ -4,10 +4,11 @@
 
 @section('content')
     <p>コンテンツ内容が入ります</p>
-    @foreach($artists as $artist)
-    	<p>{{ $artist->name }}</p>
-    @endforeach
-    <input type="submit" class="btn btn-deafult">
+    <div class="row">
+	    @foreach($artists as $artist)
+	    	<div class="col-md-3 block">{{ $artist->name }}</div>
+	    @endforeach
+	</div>
 @endsection
  
 @include('layouts.footer')
