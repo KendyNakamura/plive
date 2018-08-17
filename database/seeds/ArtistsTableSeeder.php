@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Model\Artist;
+use Plive\Http\Model\Artist;
 
 class ArtistsTableSeeder extends Seeder
 {

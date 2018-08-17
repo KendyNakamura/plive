@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    // 'name' => env('APP_NAME', 'Laravel'),
+    'name' => 'Plive',
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'development'),
 
     /*
     |--------------------------------------------------------------------------
@@ -154,11 +155,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Plive\Providers\AppServiceProvider::class,
+        Plive\Providers\AuthServiceProvider::class,
+        // Plive\Providers\BroadcastServiceProvider::class,
+        Plive\Providers\EventServiceProvider::class,
+        Plive\Providers\RouteServiceProvider::class,
 
     ],
 

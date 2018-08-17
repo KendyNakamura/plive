@@ -1,19 +1,33 @@
-<DOCTYPE HTML>
-<html lang="ja">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-@yield('head')
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-@yield('header')
-<div class="contents">
-    <div class="main">
-        @yield('content')
+    <div id="app">
+            @yield('header')
+        <div class="container">
+            <main class="py-4">
+                @yield('content')
+            </main>
+        </div>
     </div>
-    <div class="sub">
-        @yield('sub')
-        @yield('pageSub')
-    </div>
-</div>
-@yield('footer')
 </body>
 </html>
