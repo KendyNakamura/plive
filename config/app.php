@@ -155,11 +155,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Plive\Providers\AppServiceProvider::class,
-        Plive\Providers\AuthServiceProvider::class,
-        // Plive\Providers\BroadcastServiceProvider::class,
-        Plive\Providers\EventServiceProvider::class,
-        Plive\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 

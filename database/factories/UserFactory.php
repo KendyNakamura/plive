@@ -13,11 +13,22 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Plive\User::class, function (Faker $faker) {
+// User
+$factory->define(App\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
         'remember_token' => str_random(10),
+    ];
+});
+
+// artist
+$factory->define(App\Http\Model\Artist::class, function (Faker $faker) {
+    return [
+        'name' => $faker->name,
+        'content' => str_random(10),
+        'url' => 'https://google.com', // secret
+        'image' => 'images/tama.jpg',
     ];
 });

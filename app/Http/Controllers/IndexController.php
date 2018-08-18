@@ -1,9 +1,9 @@
 <?php
 
-namespace Plive\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Plive\Http\Model\Artist;
+use App\Http\Model\Artist;
 
 class IndexController extends Controller
 {

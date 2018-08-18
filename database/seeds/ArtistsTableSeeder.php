@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Plive\Http\Model\Artist;
+use App\Http\Model\Artist;
 
 class ArtistsTableSeeder extends Seeder
 {
@@ -13,9 +13,11 @@ class ArtistsTableSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create('ja_JP');
+
     	for ($i = 1; $i <= 10; $i++) {
     		Artist::create([
-	            'name' => str_random(10),
+	            'name' => $faker->name,
 		        'url' => 'https://google.com',
 		        'content' => 'アーティストに関する説明' . $i,
 	            'image' => 'images/tama.jpg'
