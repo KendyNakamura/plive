@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'IndexController@index')->name('top.index');
+Route::get('/', 'IndexController@index')->name('artist.index');
+Route::get('/artist/{artist}', 'IndexController@show')->name('artist.show');
 
 Auth::routes();
 

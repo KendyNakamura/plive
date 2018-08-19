@@ -7,9 +7,10 @@ use Laravel\Dusk\Browser;
 use App\Http\Model\Artist;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
+
 class ArtistIndexTest extends DuskTestCase
 {
-//    use DatabaseMigrations;
+    use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -26,6 +27,12 @@ class ArtistIndexTest extends DuskTestCase
                 ->assertSee('Plive')
                 ->assertSee($artist->name)
                 ->assertSee($artist->content);
+
+            $browser->visit('/')
+                ->clickLink($artist->name)
+                ->assertPathIs('/artist/'. $artist->id)
+                ->assertSee('Plive')
+                ->assertSee($artist->name);
         });
     }
 }
