@@ -17,17 +17,19 @@ class ArtistIndexTest extends DuskTestCase
      * @return void
      */
 
-    public function testExample()
+    public function testArtistPage()
     {
 
         $artist = factory(Artist::class)->create();
 
         $this->browse(function (Browser $browser) use ($artist) {
+//            作成したアーティストが表示されていること
             $browser->visit('/')
                 ->assertSee('Plive')
                 ->assertSee($artist->name)
                 ->assertSee($artist->content);
 
+//            アーティストの詳細ページ
             $browser->visit('/')
                 ->clickLink($artist->name)
                 ->assertPathIs('/artist/'. $artist->id)

@@ -7,9 +7,9 @@ use App\Http\Model\Artist;
 
 class IndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-    	$artists = Artist::all();
+    	$artists = Artist::search($request);
     	return view('artist.index', ['artists' => $artists]);
     }
 
