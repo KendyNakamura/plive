@@ -19,6 +19,27 @@ class UserLoginTest extends DuskTestCase
      * @return void
      * @group usertest
      */
+    public function testUserRegister()
+    {
+        $faker = Faker::create('ja_JP');
+
+        $this->browse(function ($browser) use ($faker) {
+            // ログイン
+            $browser->visit('/register')
+                ->type('name', $faker->name)
+                ->type('email', $faker->unique()->safeEmail)
+                ->type('password', 'secret')
+                ->type('password_confirmation', 'secret')
+                ->press('Register')
+                ->assertPathIs('/profile');
+
+            // ログアウト
+            $browser->visit('/')
+                ->click('@myname')
+                ->clickLink('Logout')
+                ->assertPathIs('/');
+        });
+    }
 
     public function testUserLogin()
     {
@@ -29,29 +50,7 @@ class UserLoginTest extends DuskTestCase
                 ->type('email', $user->email)
                 ->type('password', 'secret')
                 ->press('Login')
-                ->assertPathIs('/home');
-
-            // ログアウト
-            $browser->visit('/')
-                ->clickLink($user->name)
-                ->clickLink('Logout')
-                ->assertPathIs('/');
-        });
-    }
-
-    public function testUserRegister()
-    {
-        $faker = Faker::create('ja_JP');
-        $this->browse(function ($browser) use ($faker) {
-            // ログイン
-            $browser->visit('/register')
-                ->type('name', $faker->name)
-                ->type('email', $faker->unique()->safeEmail)
-                ->type('password', 'secret')
-                ->type('password_confirmation', 'secret')
-                ->press('Register')
-                ->assertPathIs('/home')
-                ->assertSee('You are logged in!');
+                ->assertPathIs('/profile');
         });
     }
 }

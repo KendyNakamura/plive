@@ -11,13 +11,17 @@
 |
 */
 
+//アーティスト
 Route::get('/', 'IndexController@index')->name('artist.index');
 Route::get('/artist/{artist}', 'IndexController@show')->name('artist.show');
 
+//認証
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//ユーザ
+Route::get('/profile', 'HomeController@index')->name('profile');
 
+//クローラ
 Route::get('/movie', function() {
     $crawler = Goutte::request('GET', 'http://www.uplink.co.jp/movie-show/nowshowing');
     $crawler->filter('article.post h2 a')->each(function ($node) {
