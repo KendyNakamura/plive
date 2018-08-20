@@ -12,7 +12,7 @@
             <div class="row">
                 @foreach($artists as $artist)
                     <div class="col-md-3 block border">
-                        <p><a href="{{ route('artist.show', $artist) }}" target="_blank">{{ $artist->name }}</a></p>
+                        <p><a href="{{ route('artist.show', $artist) }}">{{ $artist->name }}</a></p>
                         <p>{{ $artist->content }}</p>
                         <p><a href="{{ $artist->url }}" target="_blank">アーティストページへ</a></p>
                         <img class="logo" src="/storage/{{ $artist->image }}" alt="logo" width="150px" height="150px">

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class Artist extends Model
 {
+	public function lives()
+    {
+    	return $this->hasMany('App\Http\Model\live');
+    }
+
     public static function search(Request $request)
     {
         $query = Artist::query();
