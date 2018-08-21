@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnUrlLivesTable extends Migration
+class AddColumnSelectorArtistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,7 @@ class AddColumnUrlLivesTable extends Migration
      */
     public function up()
     {
-        Schema::table('lives', function (Blueprint $table) {
-            $table->string('url')->after('title');
+        Schema::table('artists', function (Blueprint $table) {
             $table->string('selector')->after('url');
         });
     }
@@ -26,8 +25,7 @@ class AddColumnUrlLivesTable extends Migration
      */
     public function down()
     {
-        Schema::table('lives', function (Blueprint $table) {
-            $table->dropColumn('url');
+        Schema::table('artists', function (Blueprint $table) {
             $table->dropColumn('selector');
         });
     }

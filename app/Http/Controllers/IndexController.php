@@ -18,9 +18,12 @@ class IndexController extends Controller
     {
         $client = new Client();
         $crawler = $client->request('GET', $artist->url);
-        $lives = $crawler->filter($artist->content)->each(function($element){
-            return $element->text()."\n";
+        $lives = $crawler->filter($artist->selector)->each(function($element){
+            return $element->text();
         });
-        return view('artist.show', ['artist' => $artist, 'lives' => $lives]);
+        $dates = $crawler->filter($artist->content)->each(function($element){
+            return $element->text();
+        });
+        return view('artist.show', ['artist' => $artist, 'lives' => $lives, 'dates' => $dates]);
     }
 }

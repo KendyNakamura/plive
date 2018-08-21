@@ -23,8 +23,8 @@ Route::get('/profile', 'HomeController@index')->name('profile');
 
 //クローラ
 Route::get('/movie', function() {
-    $crawler = Goutte::request('GET', 'http://acidman.jp/content/liveinfo/');
-    $crawler->filter('.entry-title a')->each(function ($node) {
+    $crawler = Goutte::request('GET', 'https://10-feet.kyoto/contents/live');
+    $crawler->filter('.time')->each(function ($node) {
         echo $node->text();
         echo '<br/>';
     });

@@ -11,6 +11,7 @@ class Artist extends Model
         'name',
         'url',
         'content',
+        'selector',
         'image',
     ];
 

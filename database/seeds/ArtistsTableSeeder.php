@@ -17,27 +17,52 @@ class ArtistsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('ja_JP');
 
-//        factory(App\Http\Model\Artist::class, 5)->create()->each(function ($u) {
-//            $u->lives()->save(factory(App\Http\Model\Live::class, 5)->make());
-//        });
+        $artist1 = Artist::create([
+            'name' => 'ACIDMAN',
+            'url' => 'http://acidman.jp/content/liveinfo/',
+            'content' => '.entry-livedate',
+            'selector' => '.entry-title a',
+            'image' => 'images/tama.jpg'
+        ]);
 
-    	for ($i = 1; $i <= 10; $i++) {
-    		Artist::create([
-	            'name' => $faker->name,
-		        'url' => 'https://google.com',
-		        'content' => 'アーティストに関する説明' . $i,
-	            'image' => 'images/tama.jpg'
-        	]);
+        $artist2 = Artist::create([
+            'name' => '10-FEET',
+            'url' => 'https://10-feet.kyoto/contents/live',
+            'content' => '.time',
+            'selector' => '.title h3',
+            'image' => 'images/tama.jpg'
+        ]);
 
-            for ($j = 1; $j <= 5; $j++)
-            {
-                Live::create([
-                    'title' => $faker->name,
-                    'url' => 'http://acidman.jp/content/liveinfo/',
-                    'selector' => '.entry-title a',
-                    'artist_id' => $j
-                ]);
-            }
+        $artist3 = Artist::create([
+            'name' => '岡崎体育',
+            'url' => 'https://okazakitaiiku.com/contents/live',
+            'content' => '.time',
+            'selector' => '.title h3',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist4 = Artist::create([
+            'name' => 'BUZZ THE BEARS',
+            'url' => 'http://buzzthebears.com/news/3',
+            'content' => '.topics_date',
+            'selector' => '.live_title a',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist5 = Artist::create([
+            'name' => '[ALEXANDROS]',
+            'url' => 'https://alexandros.jp/contents/schedule',
+            'content' => '.date',
+            'selector' => '.schedule a span:nth-of-type(2)',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        for ($j = 1; $j <= 5; $j++)
+        {
+            Live::create([
+                'title' => $faker->name,
+                'artist_id' => $j
+            ]);
         }
     }
 }
