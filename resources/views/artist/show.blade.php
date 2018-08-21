@@ -13,8 +13,8 @@
         </div>
         <div class="border">
             <h2>ライブ一覧</h2>
-	        @foreach($artist->lives as $live)
-	        	<p>{{ $live->title }}</p>
+	        @foreach($lives as $live)
+	        	<p>{{ $live }}</p>
 	        @endforeach
             <h2>ユーザ一覧</h2>
             @foreach($artist->users as $user)

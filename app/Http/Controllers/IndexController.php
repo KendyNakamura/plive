@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Model\Artist;
+use Goutte\Client;
 
 class IndexController extends Controller
 {
@@ -15,6 +16,11 @@ class IndexController extends Controller
 
     public function show(Artist $artist)
     {
-        return view('artist.show', ['artist' => $artist]);
+        $client = new Client();
+        $crawler = $client->request('GET', $artist->url);
+        $lives = $crawler->filter($artist->content)->each(function($element){
+            return $element->text()."\n";
+        });
+        return view('artist.show', ['artist' => $artist, 'lives' => $lives]);
     }
 }

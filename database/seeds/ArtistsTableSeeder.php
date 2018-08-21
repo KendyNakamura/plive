@@ -17,9 +17,9 @@ class ArtistsTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create('ja_JP');
 
-        factory(App\Http\Model\Artist::class, 5)->create()->each(function ($u) {
-            $u->lives()->save(factory(App\Http\Model\Live::class, 5)->make());
-        });
+//        factory(App\Http\Model\Artist::class, 5)->create()->each(function ($u) {
+//            $u->lives()->save(factory(App\Http\Model\Live::class, 5)->make());
+//        });
 
     	for ($i = 1; $i <= 10; $i++) {
     		Artist::create([
@@ -33,6 +33,8 @@ class ArtistsTableSeeder extends Seeder
             {
                 Live::create([
                     'title' => $faker->name,
+                    'url' => 'http://acidman.jp/content/liveinfo/',
+                    'selector' => '.entry-title a',
                     'artist_id' => $j
                 ]);
             }

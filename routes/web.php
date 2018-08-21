@@ -23,8 +23,8 @@ Route::get('/profile', 'HomeController@index')->name('profile');
 
 //クローラ
 Route::get('/movie', function() {
-    $crawler = Goutte::request('GET', 'http://www.uplink.co.jp/movie-show/nowshowing');
-    $crawler->filter('article.post h2 a')->each(function ($node) {
+    $crawler = Goutte::request('GET', 'http://acidman.jp/content/liveinfo/');
+    $crawler->filter('.entry-title a')->each(function ($node) {
         echo $node->text();
         echo '<br/>';
     });
