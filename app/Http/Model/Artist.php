@@ -12,6 +12,11 @@ class Artist extends Model
     	return $this->hasMany('App\Http\Model\live');
     }
 
+    public function users()
+    {
+        return $this->belongsToMany('App\User');
+    }
+
     public static function search(Request $request)
     {
         $query = Artist::query();

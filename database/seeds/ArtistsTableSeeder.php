@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
+use App\User;
 
 class ArtistsTableSeeder extends Seeder
 {
@@ -15,6 +16,10 @@ class ArtistsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create('ja_JP');
+
+        factory(App\Http\Model\Artist::class, 5)->create()->each(function ($u) {
+            $u->lives()->save(factory(App\Http\Model\Live::class, 5)->make());
+        });
 
     	for ($i = 1; $i <= 10; $i++) {
     		Artist::create([
