@@ -27,9 +27,9 @@
                 <tr>
                     <th>ライブ</th>
                 </tr>
-                @foreach($lives as $live)
+                @foreach($artist->lives as $live)
                     <tr>
-                        <td>{{ $live }}</td>
+                        <td>{{ $live->title }}</td>
                     </tr>
                 @endforeach
             </table>
