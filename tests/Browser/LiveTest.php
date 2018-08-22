@@ -16,11 +16,15 @@ class LiveTest extends DuskTestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testLiveIndex()
     {
         $artist = factory(Artist::class)->create();
-        $live = factory(Live::class)->create();
+        $live = Live::create([
+            'title' => 'ライブタイトル',
+            'artist_id' => $artist->id,
+        ]);
 
+        // アーティスト詳細ページに行って、アーティストの名前とライブのタイトルが表示
         $this->browse(function (Browser $browser) use ($artist, $live) {
             $browser->visit('/')
                 ->clickLink($artist->name)

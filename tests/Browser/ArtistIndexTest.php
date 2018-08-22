@@ -19,7 +19,6 @@ class ArtistIndexTest extends DuskTestCase
 
     public function testArtistPage()
     {
-
         $artist = factory(Artist::class)->create();
 
         $this->browse(function (Browser $browser) use ($artist) {
