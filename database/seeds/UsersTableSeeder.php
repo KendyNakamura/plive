@@ -17,5 +17,14 @@ class UsersTableSeeder extends Seeder
         	'email' => 'kenji.nkmr.1117@gmail.com',
         	'password' => bcrypt('1qaz2wsx'),
         ]);
+
+        for ($i=1; $i < 10; $i++)
+        {
+            $user = factory(App\User::class)->create();
+
+            for ($j=1; $j < 10; $j++){
+                $user->artists()->attach($j);
+            }
+        }
     }
 }

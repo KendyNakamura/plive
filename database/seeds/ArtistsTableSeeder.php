@@ -1,10 +1,8 @@
 <?php
 
+use App\Http\Model\Artist;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Http\Model\Artist;
-use App\Http\Model\Live;
-use App\User;
 
 class ArtistsTableSeeder extends Seeder
 {
@@ -56,5 +54,11 @@ class ArtistsTableSeeder extends Seeder
             'selector' => '.schedule a span:nth-of-type(2)',
             'image' => 'images/tama.jpg'
         ]);
+
+        $artist1->users()->attach($artist1->id);
+        $artist2->users()->attach($artist2->id);
+        $artist3->users()->attach($artist3->id);
+        $artist4->users()->attach($artist4->id);
+        $artist5->users()->attach($artist5->id);
     }
 }
