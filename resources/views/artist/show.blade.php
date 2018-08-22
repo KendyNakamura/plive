@@ -35,11 +35,16 @@
             </table>
 
 
-            <h2>ユーザ一覧</h2>
+            <h2>登録しているユーザ一覧</h2>
+            @foreach($artist->users as $user)
+                <tr>
+                    <td>{{ $user->name }}</td>
+                </tr>
+            @endforeach
 
 	        <form role="form" class="form" method="POST" action="{{ route('artist.register', $artist) }}">
                 {{ csrf_field() }}
-                <input type="text" name="users" value="{{ Auth::user()->id ?? ''}}">
+                <input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">
 	        	<button type="submit" class="btn btn-primary">登録する</button>
 	        </form>
 	    </div>

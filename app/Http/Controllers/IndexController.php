@@ -8,6 +8,11 @@ use Goutte\Client;
 
 class IndexController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('register');
+    }
+
     public function index(Request $request)
     {
     	$artists = Artist::search($request);
@@ -26,8 +31,8 @@ class IndexController extends Controller
 
     public function register(Request $request, Artist $artist)
     {
-        $artist->fill($request->all())->save();
-        $artist->users()->sync($request->users);
+        // $artist->fill($request->all())->save();
+        $artist->users()->attach($request->users);
 
         return redirect(route('artist.show', $artist));
     }
