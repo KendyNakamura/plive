@@ -56,13 +56,5 @@ class ArtistsTableSeeder extends Seeder
             'selector' => '.schedule a span:nth-of-type(2)',
             'image' => 'images/tama.jpg'
         ]);
-
-        for ($j = 1; $j <= 5; $j++)
-        {
-            Live::create([
-                'title' => $faker->name,
-                'artist_id' => $j
-            ]);
-        }
     }
 }
