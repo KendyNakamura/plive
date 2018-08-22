@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Model\Artist;
 use Goutte\Client;
 
-class IndexController extends Controller
+class ArtistController extends Controller
 {
     public function __construct()
     {
