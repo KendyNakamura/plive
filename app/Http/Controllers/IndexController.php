@@ -23,4 +23,12 @@ class IndexController extends Controller
         });
         return view('artist.show', ['artist' => $artist, 'dates' => $dates]);
     }
+
+    public function register(Request $request, Artist $artist)
+    {
+        $artist->fill($request->all())->save();
+        $artist->users()->sync($request->users);
+
+        return redirect(route('artist.show', $artist));
+    }
 }

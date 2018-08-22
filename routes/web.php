@@ -15,6 +15,9 @@
 Route::get('/', 'IndexController@index')->name('artist.index');
 Route::get('/artist/{artist}', 'IndexController@show')->name('artist.show');
 
+// アーティスト登録
+Route::post('/artist/{artist}/register', 'IndexController@register')->name('artist.register');
+
 //認証
 Auth::routes();
 
