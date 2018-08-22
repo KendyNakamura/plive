@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class Artist extends Model
 {
+    protected $fillable = [
+        'name',
+        'url',
+        'content',
+        'selector',
+        'image',
+    ];
+
 	public function lives()
     {
     	return $this->hasMany('App\Http\Model\live');

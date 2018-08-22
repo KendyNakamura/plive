@@ -13,9 +13,28 @@
         </div>
         <div class="border">
             <h2>ライブ一覧</h2>
-	        @foreach($artist->lives as $live)
-	        	<p>{{ $live->title }}</p>
-	        @endforeach
+            <table style="display: inline-block">
+                <tr>
+                    <th>日付</th>
+                </tr>
+                @foreach($dates as $date)
+                    <tr>
+                        <td>{{ $date }}</td>
+                    </tr>
+                @endforeach
+            </table>
+            <table style="display: inline-block">
+                <tr>
+                    <th>ライブ</th>
+                </tr>
+                @foreach($artist->lives as $live)
+                    <tr>
+                        <td>{{ $live->title }}</td>
+                    </tr>
+                @endforeach
+            </table>
+
+
             <h2>ユーザ一覧</h2>
             @foreach($artist->users as $user)
 	        	<p>{{ $user->name }}</p>

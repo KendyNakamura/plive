@@ -12,26 +12,54 @@ class ArtistsTableSeeder extends Seeder
      */
     public function run()
     {
-        // factory(App\Http\Model\Artist::class, 5)->create('ja_JP');
         $faker = Faker\Factory::create('ja_JP');
 
-    	for ($i = 1; $i <= 10; $i++) {
-    		$artist = App\Http\Model\Artist::create([
-	            'name' => $faker->name,
-		        'url' => 'https://google.com',
-		        'content' => 'アーティストに関する説明' . $i,
-	            'image' => 'images/tama.jpg'
-        	]);
+        $artist1 = Artist::create([
+            'name' => 'ACIDMAN',
+            'url' => 'http://acidman.jp/content/liveinfo/',
+            'content' => '.entry-livedate',
+            'selector' => '.entry-title a',
+            'image' => 'images/tama.jpg'
+        ]);
 
-            $artist->users()->attach($artist->id);
-        
-            for ($j = 1; $j <= 5; $j++)
-            {
-                App\Http\Model\Live::create([
-                    'title' => $faker->name,
-                    'artist_id' => $artist->id
-                ]);
-            }
+        $artist2 = Artist::create([
+            'name' => '10-FEET',
+            'url' => 'https://10-feet.kyoto/contents/live',
+            'content' => '.time',
+            'selector' => '.title h3',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist3 = Artist::create([
+            'name' => '岡崎体育',
+            'url' => 'https://okazakitaiiku.com/contents/live',
+            'content' => '.time',
+            'selector' => '.title h3',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist4 = Artist::create([
+            'name' => 'BUZZ THE BEARS',
+            'url' => 'http://buzzthebears.com/news/3',
+            'content' => '.topics_date',
+            'selector' => '.live_title a',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist5 = Artist::create([
+            'name' => '[ALEXANDROS]',
+            'url' => 'https://alexandros.jp/contents/schedule',
+            'content' => '.date',
+            'selector' => '.schedule a span:nth-of-type(2)',
+            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist1->users()->attach($artist1->id);
+        $artist2->users()->attach($artist2->id);
+        $artist3->users()->attach($artist3->id);
+        $artist4->users()->attach($artist4->id);
+        $artist5->users()->attach($artist5->id);
+
         }
     }
 }
