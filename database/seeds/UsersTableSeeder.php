@@ -11,10 +11,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 5)->create()->each(function ($u) {
-            $u->artists()->save(factory(App\Http\Model\Artist::class, 5)->create()->each(function ($v) {
-                $v->lives()->save(factory(App\Http\Model\Live::class, 5)->make());
-            });
-        });
+        for ($i=1; $i < 10; $i++)
+        {
+            $user = factory(App\User::class)->create();
+
+            for ($j=1; $j < 10; $j++){
+                $user->artists()->attach($j);
+            }
+        }
     }
 }
