@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Model\Artist;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -60,6 +61,5 @@ class ArtistsTableSeeder extends Seeder
         $artist4->users()->attach($artist4->id);
         $artist5->users()->attach($artist5->id);
 
-        }
     }
 }
