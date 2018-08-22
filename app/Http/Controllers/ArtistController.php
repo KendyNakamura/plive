@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Model\Artist;
 use Goutte\Client;
 
-class IndexController extends Controller
+class ArtistController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('register');
+    }
+
     public function index(Request $request)
     {
     	$artists = Artist::search($request);
@@ -22,5 +27,13 @@ class IndexController extends Controller
             return $element->text();
         });
         return view('artist.show', ['artist' => $artist, 'dates' => $dates]);
+    }
+
+    public function register(Request $request, Artist $artist)
+    {
+        // $artist->fill($request->all())->save();
+        $artist->users()->attach($request->users);
+
+        return redirect(route('artist.show', $artist));
     }
 }

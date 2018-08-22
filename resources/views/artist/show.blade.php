@@ -35,11 +35,22 @@
             </table>
 
 
-            <h2>ユーザ一覧</h2>
+            <h2>登録しているユーザ一覧</h2>
             @foreach($artist->users as $user)
-	        	<p>{{ $user->name }}</p>
-	        @endforeach
-	    </div>
+                <tr>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                </tr>
+            @endforeach
+
+            <form role="form" class="form" method="POST" action="{{ route('artist.register', $artist) }}">
+                {{ csrf_field() }}
+                <input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">
+                @if (Auth::user())
+                <input type="submit" class="btn btn-primary" value="{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? '登録する' : '登録済'}}"{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? '' : ' disabled'}}>
+                @endif
+            </form>
+        </div>
     </div>
 @endsection
 

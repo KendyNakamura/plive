@@ -12,8 +12,11 @@
 */
 
 //アーティスト
-Route::get('/', 'IndexController@index')->name('artist.index');
-Route::get('/artist/{artist}', 'IndexController@show')->name('artist.show');
+Route::get('/', 'ArtistController@index')->name('artist.index');
+Route::get('/artist/{artist}', 'ArtistController@show')->name('artist.show');
+
+// アーティスト登録
+Route::post('/artist/{artist}/register', 'ArtistController@register')->name('artist.register');
 
 //認証
 Auth::routes();
