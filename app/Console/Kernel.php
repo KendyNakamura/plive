@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
                     $live->save();
                 });
             }
-        })->dailyAt('13:00');
+        })->dailyAt('3:00');
     }
 
     /**
