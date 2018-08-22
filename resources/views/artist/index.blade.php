@@ -8,6 +8,7 @@
             @include('layouts.leftbar')
         </div>
         <div class="col-md-9">
+            {{ Breadcrumbs::render('Home') }}
             <p>コンテンツ内容が入ります</p>
             <div class="row">
                 @foreach($artists as $artist)

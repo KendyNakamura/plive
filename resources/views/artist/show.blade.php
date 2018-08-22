@@ -3,6 +3,8 @@
 @include('layouts.header')
 
 @section('content')
+    {{ Breadcrumbs::render('artist', $artist) }}
+
     <p>詳細ページ</p>
     <div class="row">
         <div class="col-md-3 border">
