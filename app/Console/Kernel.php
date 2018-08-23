@@ -27,13 +27,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//        $schedule->call(function () {
+        $schedule->call(function () {
             $client = new Client();
             $artists = Artist::all();
             foreach ($artists as $artist) {
                 $crawler = $client->request('GET', $artist->url);
                 $crawler->filter($artist->selector)->each(function ($element) use ($artist) {
-                    if (!Live::where('title', $element->text())) {
+                    if (empty($artist->lives->where('title', $element->text())->first())) {
                         $live = new Live;
                         $live->title = $element->text();
                         $live->artist_id = $artist->id;
@@ -41,7 +41,10 @@ class Kernel extends ConsoleKernel
                     }
                 });
             }
-//        })->dailyAt('3:00');
+        })->dailyAt('3:00')
+            ->after(function () {
+                echo 'finish';
+            });
     }
 
     /**
