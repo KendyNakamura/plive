@@ -18,7 +18,7 @@ class ArtistsTableSeeder extends Seeder
         $artist1 = Artist::create([
             'name' => 'ACIDMAN',
             'url' => 'http://acidman.jp/content/liveinfo/',
-            'content' => '.entry-livedate',
+            'date_selector' => '.entry-livedate',
             'selector' => '.entry-title a',
             'image' => 'images/tama.jpg'
         ]);
@@ -26,7 +26,7 @@ class ArtistsTableSeeder extends Seeder
         $artist2 = Artist::create([
             'name' => '10-FEET',
             'url' => 'https://10-feet.kyoto/contents/live',
-            'content' => '.time',
+            'date_selector' => '.time',
             'selector' => '.title h3',
             'image' => 'images/tama.jpg'
         ]);
@@ -34,7 +34,7 @@ class ArtistsTableSeeder extends Seeder
         $artist3 = Artist::create([
             'name' => '岡崎体育',
             'url' => 'https://okazakitaiiku.com/contents/live',
-            'content' => '.time',
+            'date_selector' => '.time',
             'selector' => '.title h3',
             'image' => 'images/tama.jpg'
         ]);
@@ -42,7 +42,7 @@ class ArtistsTableSeeder extends Seeder
         $artist4 = Artist::create([
             'name' => 'BUZZ THE BEARS',
             'url' => 'http://buzzthebears.com/news/3',
-            'content' => '.topics_date',
+            'date_selector' => '.topics_date',
             'selector' => '.live_title a',
             'image' => 'images/tama.jpg'
         ]);
@@ -50,7 +50,7 @@ class ArtistsTableSeeder extends Seeder
         $artist5 = Artist::create([
             'name' => '[ALEXANDROS]',
             'url' => 'https://alexandros.jp/contents/schedule',
-            'content' => '.date',
+            'date_selector' => '.date',
             'selector' => '.schedule a span:nth-of-type(2)',
             'image' => 'images/tama.jpg'
         ]);

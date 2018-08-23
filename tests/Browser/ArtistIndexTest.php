@@ -25,8 +25,7 @@ class ArtistIndexTest extends DuskTestCase
 //            作成したアーティストが表示されていること
             $browser->visit('/')
                 ->assertSee('Plive')
-                ->assertSee($artist->name)
-                ->assertSee($artist->content);
+                ->assertSee($artist->name);
 
 //            アーティストの詳細ページ
             $browser->visit('/')
