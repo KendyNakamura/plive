@@ -23,7 +23,7 @@ class ArtistController extends Controller
     {
         $client = new Client();
         $crawler = $client->request('GET', $artist->url);
-        $dates = $crawler->filter($artist->content)->each(function($element){
+        $dates = $crawler->filter($artist->date_selector)->each(function($element){
             return $element->text();
         });
         return view('artist.show', ['artist' => $artist, 'dates' => $dates]);
