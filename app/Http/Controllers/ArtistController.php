@@ -10,7 +10,7 @@ class ArtistController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('register');
+        $this->middleware('auth')->only(['register', 'registerDelete']);
     }
 
     public function index(Request $request)
@@ -33,13 +33,13 @@ class ArtistController extends Controller
     {
         $artist->users()->attach($request->users);
 
-        return redirect(route('artist.show', $artist));
+        return redirect(route('artist.show', $artist))->with('result', __('c.registered'));
     }
 
     public function registerDelete(Request $request, Artist $artist)
     {
         $artist->users()->detach($request->users);;
 
-        return redirect(route('artist.show', $artist));
+        return redirect(route('artist.show', $artist))->with('result', __('c.deleted'));
     }
 }

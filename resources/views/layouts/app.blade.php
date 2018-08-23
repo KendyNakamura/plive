@@ -25,6 +25,17 @@
             @yield('header')
         <div class="container">
             <main class="py-4">
+            @if (session('result'))
+                <div class="alert alert-success" role="alert">
+                    @if(is_array(session('result')))
+                        @foreach (session('result') as $result_item)
+                            {{ $result_item }}{!! $loop->last ? '' : '<br>' !!}
+                        @endforeach
+                    @else
+                        {{ session('result') }}
+                    @endif
+                </div>
+            @endif
                 @yield('content')
             </main>
         </div>
