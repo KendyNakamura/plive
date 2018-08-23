@@ -31,8 +31,14 @@ class ArtistController extends Controller
 
     public function register(Request $request, Artist $artist)
     {
-        // $artist->fill($request->all())->save();
         $artist->users()->attach($request->users);
+
+        return redirect(route('artist.show', $artist));
+    }
+
+    public function registerDelete(Request $request, Artist $artist)
+    {
+        $artist->users()->find($request->users)->delete();
 
         return redirect(route('artist.show', $artist));
     }

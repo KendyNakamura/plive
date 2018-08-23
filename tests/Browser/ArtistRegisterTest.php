@@ -38,11 +38,11 @@ class ArtistRegisterTest extends DuskTestCase
                 ->visit('/artist/' . $artist->id)
                 ->press('登録する')
                 ->visit('/profile')
-                ->assertSee('$artist->name')
+                ->assertSee($user->artists->where('id', $user->id)->first()->name)
                 ->visit('/artist/' . $artist->id)
                 ->press('登録済')
                 ->visit('/profile')
-                ->assertDontSee('$artist->name');
+                ->assertDontSee($user->artists->where('id', $user->id)->first()->name);
         });
     }
 }

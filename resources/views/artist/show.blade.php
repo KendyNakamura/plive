@@ -45,13 +45,13 @@
                 </tr>
             @endforeach
 
-            <form role="form" class="form" method="POST" action="{{ route('artist.register', $artist) }}">
+            @if (Auth::user())
+            <form role="form" class="form" method="POST" action="{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? route('artist.register', $artist) : route('artist.register.delete', $artist) }}">
                 {{ csrf_field() }}
                 <input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">
-                @if (Auth::user())
-                <input type="submit" class="btn btn-primary" value="{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? '登録する' : '登録済'}}"{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? '' : ' disabled'}}>
-                @endif
+                <input type="submit" class="btn btn-primary" value="{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? '登録する' : '登録済'}}">
             </form>
+            @endif
         </div>
     </div>
 @endsection

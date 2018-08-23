@@ -6,6 +6,7 @@ Route::get('/artist/{artist}', 'ArtistController@show')->name('artist.show');
 
 // アーティスト登録
 Route::post('/artist/{artist}/register', 'ArtistController@register')->name('artist.register');
+Route::post('/artist/{artist}/register/delete', 'ArtistController@registerDelete')->name('artist.register.delete');
 
 //認証
 Auth::routes();
