@@ -38,7 +38,7 @@ class ArtistController extends Controller
 
     public function registerDelete(Request $request, Artist $artist)
     {
-        $artist->users()->find($request->users)->delete();
+        $artist->users()->detach($request->users);;
 
         return redirect(route('artist.show', $artist));
     }
