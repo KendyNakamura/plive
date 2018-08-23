@@ -1,12 +1,9 @@
 @extends('layouts.app')
- 
+
 @include('layouts.header')
 
 @section('content')
     <div class="row">
-        <div class="col-md-3">
-            @include('layouts.leftbar')
-        </div>
         <div class="col-md-9">
             {{ Breadcrumbs::render('Home') }}
             <p>コンテンツ内容が入ります</p>
@@ -24,7 +21,10 @@
                 {{ $artists->links() }}
             </div>
         </div>
+        <div class="col-md-3">
+            @include('layouts.rightbar')
+        </div>
     </div>
 @endsection
- 
+
 @include('layouts.footer')
