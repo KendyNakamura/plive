@@ -4,11 +4,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             {{ Breadcrumbs::render('Home') }}
             <div class="row">
                 @foreach($artists as $artist)
-                    <div class="col-md-3 block border">
+                    <div class="col-md-3 block border text-center">
                         <a href="{{ route('artist.show', $artist) }}">
                             <img class="logo" src="/storage/{{ $artist->image }}" alt="logo" width="150px" height="150px">
                             <p>{{ $artist->name }}</p>
@@ -20,9 +20,6 @@
             <div class="mt-3">
                 {{ $artists->links() }}
             </div>
-        </div>
-        <div class="col-md-3">
-            @include('layouts.rightbar')
         </div>
     </div>
 @endsection

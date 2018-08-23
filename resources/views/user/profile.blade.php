@@ -4,20 +4,14 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-9">
-            <p>プロフィール</p>
-            <div class="row">
-                <div class="col-md-12 block border">
-                    <p>{{ Auth::user()->name }}</p>
-                    <p>{{ Auth::user()->email }}</p>
-                    <h2>アーティスト一覧</h2>
-                    @foreach(Auth::user()->artists as $artist)
-                        <p>{{ $artist->name }}</p>
-                    @endforeach
-                </div>
-            </div>
+        <div class="col-md-12 block">
+            <h2>{{ Auth::user()->name }}</h2>
+            <h2>登録アーティスト</h2>
+            @foreach(Auth::user()->artists as $artist)
+                <a href="{{ route('artist.show', $artist) }}"><p>{{ $artist->name }}</p></a>
+            @endforeach
         </div>
     </div>
 @endsection
- 
+
 @include('layouts.footer')

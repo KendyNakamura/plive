@@ -5,14 +5,13 @@
 @section('content')
     {{ Breadcrumbs::render('artist', $artist) }}
 
-    <p>詳細ページ</p>
     <div class="row">
-        <div class="col-12 border text-center">
+        <div class="col-12 text-center">
             <img class="logo" src="/storage/{{ $artist->image }}" alt="logo" width="150px" height="150px">
             <p>{{ $artist->name }}</p>
-            <p><a href="{{ $artist->url }}">アーティストページへ</a></p>
+            <p><a href="{{ $artist->url }}" target="_blank">アーティストページへ</a></p>
         </div>
-        <div class="col-md-6 border">
+        <div class="col-md-6">
             <h2>ライブ一覧</h2>
             <div class="row">
                 <table class="col-3" style="display: inline-block">
@@ -37,7 +36,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-6 border">
+        <div class="col-md-6">
             <h2>登録しているユーザ一覧</h2>
             @foreach($artist->users as $user)
                 <tr>
