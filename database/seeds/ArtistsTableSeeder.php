@@ -18,40 +18,36 @@ class ArtistsTableSeeder extends Seeder
         $artist1 = Artist::create([
             'name' => 'ACIDMAN',
             'url' => 'http://acidman.jp/content/liveinfo/',
+            'selector' => '.entry-post',
+            'title_selector' => '.entry-title a',
             'date_selector' => '.entry-livedate',
-            'selector' => '.entry-title a',
             'image' => 'images/tama.jpg'
         ]);
 
         $artist2 = Artist::create([
             'name' => '10-FEET',
             'url' => 'https://10-feet.kyoto/contents/live',
+            'selector' => '.content-list li',
+            'title_selector' => '.title h3',
             'date_selector' => '.time',
-            'selector' => '.title h3',
             'image' => 'images/tama.jpg'
         ]);
 
         $artist3 = Artist::create([
             'name' => '岡崎体育',
             'url' => 'https://okazakitaiiku.com/contents/live',
+            'selector' => '.content-list li',
+            'title_selector' => '.title h3',
             'date_selector' => '.time',
-            'selector' => '.title h3',
-            'image' => 'images/tama.jpg'
-        ]);
-
-        $artist4 = Artist::create([
-            'name' => 'BUZZ THE BEARS',
-            'url' => 'http://buzzthebears.com/news/3',
-            'date_selector' => '.topics_date',
-            'selector' => '.live_title a',
             'image' => 'images/tama.jpg'
         ]);
 
         $artist5 = Artist::create([
             'name' => '[ALEXANDROS]',
             'url' => 'https://alexandros.jp/contents/schedule',
+            'selector' => '.schedule a',
+            'title_selector' => 'span:nth-of-type(2)',
             'date_selector' => '.date',
-            'selector' => '.schedule a span:nth-of-type(2)',
             'image' => 'images/tama.jpg'
         ]);
 
