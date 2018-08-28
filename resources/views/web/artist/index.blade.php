@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('web.layouts.app')
 
-@include('layouts.header')
+@include('web.layouts.header')
 
 @section('content')
     <div class="row">
@@ -24,4 +24,4 @@
     </div>
 @endsection
 
-@include('layouts.footer')
+@include('web.layouts.footer')

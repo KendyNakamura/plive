@@ -1,6 +1,6 @@
 @extends('web.layouts.app')
 
-@include('layouts.header')
+@include('web.layouts.header')
 
 @section('content')
     {{ Breadcrumbs::render('artist', $artist) }}
@@ -46,4 +46,4 @@
     </div>
 @endsection
 
-@include('layouts.footer')
+@include('web.layouts.footer')

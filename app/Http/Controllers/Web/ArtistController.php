@@ -17,7 +17,7 @@ class ArtistController extends Controller
     public function index(Request $request)
     {
     	$artists = Artist::search($request);
-    	return view('artist.index', ['artists' => $artists]);
+    	return view('web.artist.index', ['artists' => $artists]);
     }
 
     public function show(Artist $artist)
@@ -27,7 +27,7 @@ class ArtistController extends Controller
         $dates = $crawler->filter($artist->date_selector)->each(function($element){
             return $element->text();
         });
-        return view('artist.show', ['artist' => $artist, 'dates' => $dates]);
+        return view('web.artist.show', ['artist' => $artist, 'dates' => $dates]);
     }
 
     public function register(Request $request, Artist $artist)
