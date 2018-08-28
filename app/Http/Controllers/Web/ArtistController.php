@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Model\Artist;
+use App\Http\Controllers\Controller;
 use Goutte\Client;
 
 class ArtistController extends Controller

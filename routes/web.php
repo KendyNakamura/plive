@@ -16,20 +16,10 @@ Route::namespace('Web')->group(function () {
 //ユーザ
     Route::get('/profile', 'HomeController@index')->name('profile');
 
-//クローラ
-    Route::get('/movie', function () {
-        $crawler = Goutte::request('GET', 'https://10-feet.kyoto/contents/live');
-        $crawler->filter('.time')->each(function ($node) {
-            echo $node->text();
-            echo '<br/>';
-        });
-        return view('welcome');
-    });
-
 });
 
 // 管理者側ルート
 Route::namespace('Admin')->prefix('admin')->group(function () {
 
-    Route::get('/', HomeController@index)->name('index');
+    Route::get('/', 'HomeController@index')->name('index');
 });
