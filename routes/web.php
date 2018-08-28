@@ -22,4 +22,6 @@ Route::namespace('Web')->group(function () {
 Route::namespace('Admin')->prefix('admin')->group(function () {
 
     Route::get('/', 'HomeController@index')->name('index');
+
+    Route::get('/', 'HomeController@crowlerIndex')->name('crawler.index');
 });
