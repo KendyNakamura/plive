@@ -32,16 +32,18 @@ class Kernel extends ConsoleKernel
             $artists = Artist::all();
             foreach ($artists as $artist) {
                 $crawler = $client->request('GET', $artist->url);
-                $crawler->filter($artist->selector)->each(function ($element) use ($artist) {
-                    if (empty($artist->lives->where('title', $element->text())->first())) {
+                $crawler->filter($artist->selector)->each(function ($li) use ($artist) {
+                    if (empty($artist->lives->where('title', $li->filter($artist->title_selector)->text())->first()) && $li) {
                         $live = new Live;
-                        $live->title = $element->text();
+                        $live->title = $li->filter($artist->title_selector)->text();
+                        $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催)/", "", $li->filter($artist->date_selector)->text());
                         $live->artist_id = $artist->id;
                         $live->save();
                     }
                 });
             }
-        })->dailyAt('3:00')
+        })
+//        })->dailyAt('3:00')
             ->after(function () {
                 echo 'finish';
             });

@@ -13,28 +13,18 @@
         </div>
         <div class="col-md-6">
             <h2>ライブ一覧</h2>
-            <div class="row">
-                <table class="col-3" style="display: inline-block">
+            <table border="1" class="row">
+                <tr>
+                    <th>日付</th>
+                    <th class="col-9">ライブ</th>
+                </tr>
+                @foreach($artist->lives as $live)
                     <tr>
-                        <th>日付</th>
+                        <td>{{ $live->date }}</td>
+                        <td>{{ $live->title }}</td>
                     </tr>
-                    @foreach($dates as $date)
-                        <tr>
-                            <td>{{ $date }}</td>
-                        </tr>
-                    @endforeach
-                </table>
-                <table class="col-9" style="display: inline-block">
-                    <tr>
-                        <th>ライブ</th>
-                    </tr>
-                    @foreach($artist->lives as $live)
-                        <tr>
-                            <td>{{ $live->title }}</td>
-                        </tr>
-                    @endforeach
-                </table>
-            </div>
+                @endforeach
+            </table>
         </div>
         <div class="col-md-6">
             <h2>登録しているユーザ一覧</h2>

@@ -54,7 +54,6 @@ class ArtistsTableSeeder extends Seeder
         $artist1->users()->attach($artist1->id);
         $artist2->users()->attach($artist2->id);
         $artist3->users()->attach($artist3->id);
-        $artist4->users()->attach($artist4->id);
         $artist5->users()->attach($artist5->id);
     }
 }
