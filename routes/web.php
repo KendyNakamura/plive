@@ -23,3 +23,7 @@ Route::get('/movie', function() {
     });
     return view('welcome');
 });
+
+Route::get('/admin', function() {
+    return view('admin.index');
+});
