@@ -1,25 +1,27 @@
 <?php
 
+// ユーザ側ルート
+Route::namespace('Web')->group(function () {
 //アーティスト
-Route::get('/', 'ArtistController@index')->name('artist.index');
-Route::get('/artist/{artist}', 'ArtistController@show')->name('artist.show');
+    Route::get('/', 'ArtistController@index')->name('artist.index');
+    Route::get('/artist/{artist}', 'ArtistController@show')->name('artist.show');
 
 // アーティスト登録
-Route::post('/artist/{artist}/register', 'ArtistController@register')->name('artist.register');
-Route::post('/artist/{artist}/register/delete', 'ArtistController@registerDelete')->name('artist.register.delete');
+    Route::post('/artist/{artist}/register', 'ArtistController@register')->name('artist.register');
+    Route::post('/artist/{artist}/register/delete', 'ArtistController@registerDelete')->name('artist.register.delete');
 
 //認証
-Auth::routes();
+    Auth::routes();
 
 //ユーザ
-Route::get('/profile', 'HomeController@index')->name('profile');
+    Route::get('/profile', 'HomeController@index')->name('profile');
 
-//クローラ
-Route::get('/movie', function() {
-    $crawler = Goutte::request('GET', 'https://10-feet.kyoto/contents/live');
-    $crawler->filter('.time')->each(function ($node) {
-        echo $node->text();
-        echo '<br/>';
-    });
-    return view('welcome');
+});
+
+// 管理者側ルート
+Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
+
+    Route::get('/', 'HomeController@index')->name('index');
+
+    Route::get('/crowler', 'HomeController@crowlerIndex')->name('crowler.index');
 });
