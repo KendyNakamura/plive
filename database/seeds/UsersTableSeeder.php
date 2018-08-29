@@ -13,11 +13,6 @@ class UsersTableSeeder extends Seeder
     {
         factory(App\User::class, 5)->create();
 
-        \Enomotodev\LaractiveAdmin\AdminUser::create([
-        	'email' => 'kenji.nkmr.1117@gmail.com',
-        	'password' => bcrypt('1qaz2wsx'),
-        ]);
-
         for ($i=1; $i < 10; $i++)
         {
             $user = factory(App\User::class)->create();
