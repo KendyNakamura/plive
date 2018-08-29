@@ -19,9 +19,9 @@ Route::namespace('Web')->group(function () {
 });
 
 // 管理者側ルート
-Route::namespace('Admin')->prefix('admin')->group(function () {
+Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
 
     Route::get('/', 'HomeController@index')->name('index');
 
-    Route::get('/', 'HomeController@crowlerIndex')->name('crawler.index');
+    Route::get('/crowler', 'HomeController@crowlerIndex')->name('crowler.index');
 });
