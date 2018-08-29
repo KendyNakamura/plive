@@ -9,7 +9,7 @@
             <div class="row">
                 @foreach($artists as $artist)
                     <div class="col-md-3 block border text-center">
-                        <a href="{{ route('artist.show', $artist) }}">
+                        <a href="{{ route('Web::artist.show', $artist) }}">
                             <img class="logo" src="/storage/{{ $artist->image }}" alt="logo" width="150px" height="150px">
                             <p>{{ $artist->name }}</p>
                         </a>

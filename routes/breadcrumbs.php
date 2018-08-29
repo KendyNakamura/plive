@@ -2,13 +2,13 @@
 
 // Home
 Breadcrumbs::register('Home', function ($breadcrumbs) {
-    $breadcrumbs->push('Home', route('artist.index'));
+    $breadcrumbs->push('Home', route('Web::artist.index'));
 });
 
 // Home > Artist
 Breadcrumbs::register('artist', function ($breadcrumbs, $artist) {
     $breadcrumbs->parent('Home');
-    $breadcrumbs->push($artist->name, route('artist.show', $artist->name));
+    $breadcrumbs->push($artist->name, route('Web::artist.show', $artist->name));
 });
 
 //// Home > Blog
