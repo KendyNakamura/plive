@@ -20,8 +20,8 @@
 // 管理者側ルート
 Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
 
-    Route::get('login',     'Auth\LoginController@showLoginForm')->name('login');
-    Route::post('login',    'Auth\LoginController@login')->name('login');
+    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('login', 'Auth\LoginController@login')->name('login');
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/', 'HomeController@index')->name('index');

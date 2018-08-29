@@ -1,4 +1,7 @@
-<div class="container">
+@extends('layouts.app')
+
+@section('content')
+<div class="container" style="background: #0b97c4;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -54,14 +57,16 @@
                                     {{ __('Login') }}
                                 </button>
 
-{{--                                <a class="btn btn-link" href="{{ route('password.request') }}">--}}
-                                    {{--{{ __('Forgot Your Password?') }}--}}
+                                {{--<a class="btn btn-link" href="{{ route('password.request') }}">--}}
+{{--                                    {{ __('Forgot Your Password?') }}--}}
                                 {{--</a>--}}
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
+@endsection
