@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 use App\Http\Model\Artist;
 use App\Http\Controllers\Controller;
-use Goutte\Client;
 
 class ArtistController extends Controller
 {
@@ -22,12 +21,7 @@ class ArtistController extends Controller
 
     public function show(Artist $artist)
     {
-        $client = new Client();
-        $crawler = $client->request('GET', $artist->url);
-        $dates = $crawler->filter($artist->date_selector)->each(function($element){
-            return $element->text();
-        });
-        return view('web.artist.show', ['artist' => $artist, 'dates' => $dates]);
+        return view('web.artist.show', ['artist' => $artist]);
     }
 
     public function register(Request $request, Artist $artist)
