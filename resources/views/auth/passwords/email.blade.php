@@ -1,4 +1,4 @@
-@extends('web.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('Web::password.email') }}" aria-label="{{ __('Reset Password') }}">
+                    <form method="POST" action="{{ route('password.email') }}" aria-label="{{ __('Reset Password') }}">
                         @csrf
 
                         <div class="form-group row">

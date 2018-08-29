@@ -1,4 +1,4 @@
-@extends('web.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('Web::register') }}" aria-label="{{ __('Register') }}">
+                    <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
                         @csrf
 
                         <div class="form-group row">

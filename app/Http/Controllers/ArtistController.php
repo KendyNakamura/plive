@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Model\Artist;
@@ -16,12 +16,12 @@ class ArtistController extends Controller
     public function index(Request $request)
     {
     	$artists = Artist::search($request);
-    	return view('web.artist.index', ['artists' => $artists]);
+    	return view('artist.index', ['artists' => $artists]);
     }
 
     public function show(Artist $artist)
     {
-        return view('web.artist.show', ['artist' => $artist]);
+        return view('artist.show', ['artist' => $artist]);
     }
 
     public function register(Request $request, Artist $artist)

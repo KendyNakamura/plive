@@ -1,6 +1,3 @@
-@extends('admin.layouts.app')
-
-@section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,7 +5,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('Admin::login') }}" aria-label="{{ __('Login') }}">
+                    <form method="POST" action="{{ route('admin::login') }}" aria-label="{{ __('Login') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -68,4 +65,3 @@
         </div>
     </div>
 </div>
-@endsection
