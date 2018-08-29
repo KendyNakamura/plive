@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaractiveAdminCommentsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLaractiveAdminCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('laractive_admin_comments', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('commentable_id');
-            $table->string('commentable_type');
-            $table->text('body');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateLaractiveAdminCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('laractive_admin_comments');
+        Schema::dropIfExists('admins');
     }
 }
