@@ -26,7 +26,7 @@ class AddDateColumnLivesTable extends Migration
     public function down()
     {
         Schema::table('lives', function (Blueprint $table) {
-            $table->string('date');
+            $table->dropColumn('date');
         });
     }
 }

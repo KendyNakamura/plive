@@ -26,7 +26,7 @@ class ModifyContentColumnRenameDateSelectorArtistsTable extends Migration
     public function down()
     {
         Schema::table('artists', function (Blueprint $table) {
-            $table->renameColumn('content', 'date_selector');
+            $table->renameColumn('date_selector', 'content');
         });
     }
 }
