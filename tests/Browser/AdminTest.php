@@ -20,17 +20,19 @@ class AdminTest extends DuskTestCase
     {
         $admin = Admin::create(['name' => 'admin', 'email' => 'test@example.com', 'password' => bcrypt('password')]);
 
+        // ログインしていないときはログイン画面へ
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin')
-                ->assertSee('Login');
+                ->assertPathIs('/admin/login');
         });
 
+        // ログイン後、管理画面トップへ
         $this->browse(function (Browser $browser) use ($admin) {
             $browser->visit('/admin/login')
                 ->type('email', $admin->email)
                 ->type('password', 'password')
                 ->press('Login')
-                ->assertPathIs('admin');
+                ->assertPathIs('/admin');
         });
     }
 }

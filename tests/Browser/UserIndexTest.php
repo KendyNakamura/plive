@@ -33,8 +33,7 @@ class UserIndexTest extends DuskTestCase
                 ->assertPathIs('/profile')
             // プロフィール画面に行けること
                 ->assertSee('プロフィール')
-                ->assertSee($user->name)
-                ->assertSee($user->email);
+                ->assertSee($user->name);
         });
     }
 }

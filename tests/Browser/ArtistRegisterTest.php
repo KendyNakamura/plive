@@ -16,7 +16,7 @@ class ArtistRegisterTest extends DuskTestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testRegister()
     {
         $artist = factory(Artist::class)->create();
 
@@ -34,7 +34,7 @@ class ArtistRegisterTest extends DuskTestCase
                 ->type('email', $user->email)
                 ->type('password', 'secret')
                 ->press('Login')
-                ->assertPathIs('/profile')
+                ->assertPathIs('/')
                 ->visit('/artist/' . $artist->id)
                 ->press('登録する')
                 ->visit('/profile')
