@@ -17,12 +17,18 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+        $redir = route('artist.index');
+        switch ($guard) {
+            case "admin":
+                $redir = route('admin::index');
+                break;
+            default:
+                $redir = route('artist.index');
+                break;
         }
 
-        if (Auth::guard('admin')->check()) {
-            return redirect('/admin');
+        if (Auth::guard($guard)->check()) {
+            return redirect($redir);
         }
 
         return $next($request);
