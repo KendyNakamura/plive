@@ -25,7 +25,7 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/', 'HomeController@index')->name('index');
-        Route::post('Auth\logout',   'LoginController@logout')->name('logout');
+        Route::post('logout',   'LoginController@logout')->name('logout');
         Route::get('crowler', 'HomeController@crowlerIndex')->name('crowler.index');
     });
 });
