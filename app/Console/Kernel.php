@@ -33,16 +33,21 @@ class Kernel extends ConsoleKernel
             foreach ($artists as $artist) {
                 $crawler = $client->request('GET', $artist->url);
                 $crawler->filter($artist->selector)->each(function ($li) use ($artist) {
-                    if (empty($artist->lives->where('title', $li->filter($artist->title_selector)->text())->first()) && $li) {
+                    if ($li) {
                         $live = new Live;
-                        $live->title = $li->filter($artist->title_selector)->text();
-                        $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催)/", "", $li->filter($artist->date_selector)->text());
+                        $title = preg_replace("/ |　/", "", $li->filter($artist->title_selector)->text());
+                        $live->title = preg_replace("/.+\..+\(.+\)/", "", $title);
+                        $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
+                        $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
                         $live->artist_id = $artist->id;
-                        $live->save();
+                        if (empty($artist->lives->where('title', $live->title)->first()) && $li) {
+                            $live->save();
+                        }
                     }
                 });
             }
-        })->dailyAt('3:00')
+        })
+//        })->dailyAt('3:00')
             ->after(function () {
                 echo 'finish';
             });
