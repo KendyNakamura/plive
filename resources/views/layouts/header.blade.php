@@ -11,10 +11,10 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     @if (Request::is('/'))
-                    <form class="form-inline my-2 my-lg-0" action="{{ route('artist.index') }}" method="get">
-                        <input class="form-control mr-sm-2" type="search" name="artist_search" value="{{ request()->artist_search }}"placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                        <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('artist.index') }}">
+                            <input class="form-control mr-sm-2" type="search" name="artist_search" value="{{ request()->artist_search }}"placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                     @endif
                     @guest
                         <li class="nav-item">
