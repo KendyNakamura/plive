@@ -260,7 +260,7 @@ desired effect
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-            <li><a href="{{ route('admin::crowler.index') }}"><i class="fa fa-link"></i> <span>クローラー確認</span></a></li>
+            <li><a href="{{ route('admin::crawler.index') }}"><i class="fa fa-link"></i> <span>クローラー確認</span></a></li>
             <li>
                 <a class="dropdown-item" href="#"
                    onclick="event.preventDefault();
@@ -304,7 +304,20 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        @yield('content')
+        <main class="py-4">
+            @if (session('result'))
+                <div class="alert alert-info" role="alert">
+                    @if(is_array(session('result')))
+                        @foreach (session('result') as $result_item)
+                            {{ $result_item }}{!! $loop->last ? '' : '<br>' !!}
+                        @endforeach
+                    @else
+                        {{ session('result') }}
+                    @endif
+                </div>
+            @endif
+            @yield('content')
+        </main>
 
     </section>
     <!-- /.content -->
