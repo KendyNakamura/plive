@@ -10,8 +10,9 @@ class Artist extends Model
     protected $fillable = [
         'name',
         'url',
-        'content',
         'selector',
+        'title_selector',
+        'date_selector',
         'image',
     ];
 
