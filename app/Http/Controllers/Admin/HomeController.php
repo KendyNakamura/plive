@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Goutte\Client;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
 
