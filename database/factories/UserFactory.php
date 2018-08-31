@@ -22,13 +22,3 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
-
-// artist
-$factory->define(App\Http\Model\Artist::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'content' => str_random(10),
-        'url' => 'https://google.com', // secret
-        'image' => 'images/tama.jpg',
-    ];
-});

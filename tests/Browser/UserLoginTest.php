@@ -24,7 +24,7 @@ class UserLoginTest extends DuskTestCase
         $faker = Faker::create('ja_JP');
 
         $this->browse(function ($browser) use ($faker) {
-            // ログイン
+            // 登録後、ログインされてプロフィール画面へ
             $browser->visit('/register')
                 ->type('name', $faker->name)
                 ->type('email', $faker->unique()->safeEmail)
@@ -35,9 +35,8 @@ class UserLoginTest extends DuskTestCase
 
             // ログアウト
             $browser->visit('/')
-                ->click('@myname')
                 ->clickLink('Logout')
-                ->assertPathIs('/');
+                ->assertPathIs('/login');
         });
     }
 
@@ -45,12 +44,13 @@ class UserLoginTest extends DuskTestCase
     {
         $user = factory(User::class)->create();
 
+        // ログイン後、トップ画面へ
         $this->browse(function ($browser) use ($user) {
             $browser->visit('/login')
                 ->type('email', $user->email)
                 ->type('password', 'secret')
                 ->press('Login')
-                ->assertPathIs('/profile');
+                ->assertPathIs('/');
         });
     }
 }
