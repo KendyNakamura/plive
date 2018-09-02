@@ -8,11 +8,13 @@ class Live extends Model
 {
     protected $fillable = [
         'title',
-        'artist_id'
+        'date',
+        'artist_id',
     ];
 
     public function artist()
     {
     	return $this->belongsTo('App\Http\Model\Artist');
     }
+
 }
