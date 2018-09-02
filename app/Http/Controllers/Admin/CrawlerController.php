@@ -24,9 +24,6 @@ class CrawlerController extends Controller
     {
         $name = $request->name;
         $url = $request->url;
-//        $selector = $request->selector;
-//        $title_selector = $request->title_selector;
-//        $date_selector = $request->date_selector;
         $client = new Client();
         $lives = [];
         $crawler = $client->request('GET', $url);
@@ -51,5 +48,30 @@ class CrawlerController extends Controller
         Artist::create($request->all());
 
         return redirect(route('admin::crawler.index'))->with('result', __('c.saved'));
+    }
+
+    public function imageUpload(Request $request)
+    {
+        //アップロードパスを指定する。(storage/images)
+        $upload_file_path = 'storage/images/';
+
+        //テキストの入力値を受け取る。
+        $result = $request->has('text');
+        if ($result) {
+            $text = $request->input('text');
+        }
+
+        $image_name = ceil(microtime(true)*1000) . '.jpg';
+        //アップロードファイルを受け取る。
+        $result = $request->file('file')->isValid();
+        if($result){
+
+            //ファイルを格納する。
+            $file = $request->file('file')->move($upload_file_path , $image_name);
+        }
+
+        return $text;
+        //テキストの内容を付与してhtml(test.blade.php)を返却する。
+//        return view('admin.crawler.index')->with("ret", $text);
     }
 }
