@@ -45,7 +45,7 @@
                     </div>
                     <div class="box-footer">
                         <a class="btn btn-warning" href="javascript:void(0);" onClick="artist_save();" target="_blank">@lang('c.save')する</a>
-                        <a class="btn btn-default" href="{{ route('admin::crawler.preview') }}" target="_blank">@lang('c.preview')</a>
+                        <a class="btn btn-default" href="javascript:void(0);" onClick="artist_save();" target="_blank">@lang('c.preview')</a>
                     </div>
                 </form>
             </div>
