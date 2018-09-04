@@ -46,8 +46,7 @@ class Kernel extends ConsoleKernel
                     }
                 });
             }
-        })
-//        })->dailyAt('3:00')
+        })->dailyAt('3:00')
             ->after(function () {
                 echo 'finish';
             });
