@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="box box-solid">
-                <form id="artist_save_form" action="{{ route('admin::crawler.preview') }}" method="get">
+                <form id="artist_save_form" action="{{ route('admin::crawler.artist.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -44,8 +44,8 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-warning" href="javascript:void(0);" onClick="artist_save();" target="_blank">@lang('c.save')する</a>
-                        <a class="btn btn-default" href="javascript:void(0);" onClick="artist_save();" target="_blank">@lang('c.preview')</a>
+                        <a class="btn btn-warning" href="javascript:void(0);" onClick="artist_save();">@lang('c.save')する</a>
+                        <button class="btn btn-warning" name="action" value="preview" onclick="this.form.target='_blank'">@lang('c.preview')</button>
                     </div>
                 </form>
             </div>

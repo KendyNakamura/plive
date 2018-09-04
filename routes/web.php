@@ -28,7 +28,6 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
 
     // クローラー
     Route::get('crawler', 'CrawlerController@index')->name('crawler.index');
-    Route::get('crawler/preview', 'CrawlerController@preview')->name('crawler.preview');
     Route::post('crawler', 'CrawlerController@artistStore')->name('crawler.artist.store');
     Route::post('image/upload', 'CrawlerController@imageUpload')->name('image.upload');
 });
