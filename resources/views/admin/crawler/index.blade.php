@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="box-footer">
-                        <a class="btn btn-warning" href="javascript:void(0);" onClick="artist_save();">@lang('c.save')する</a>
+                        <button class="btn btn-primary" name="action" value="save" onclick="this.form.target='_top'">@lang('c.save')</button>
                         <button class="btn btn-warning" name="action" value="preview" onclick="this.form.target='_blank'">@lang('c.preview')</button>
                     </div>
                 </form>
@@ -70,15 +70,6 @@
         </div>
     </div>
 @endsection
-
-<script>
-    {{-- アーティスト保存確認 --}}
-    function artist_save(){
-        if(confirm("保存してよろしいですか？")){
-            $('#artist_save_form').submit();
-        }
-    }
-</script>
 <script>
     function send(){
 
