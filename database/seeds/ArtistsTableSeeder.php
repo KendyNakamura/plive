@@ -21,7 +21,6 @@ class ArtistsTableSeeder extends Seeder
             'selector' => '.entry-post',
             'title_selector' => '.entry-title a',
             'date_selector' => '.entry-livedate',
-            'image' => 'images/tama.jpg'
         ]);
 
         $artist2 = Artist::create([
@@ -30,7 +29,6 @@ class ArtistsTableSeeder extends Seeder
             'selector' => '.content-list li',
             'title_selector' => '.title h3',
             'date_selector' => '.time',
-            'image' => 'images/tama.jpg'
         ]);
 
         $artist3 = Artist::create([
@@ -39,21 +37,28 @@ class ArtistsTableSeeder extends Seeder
             'selector' => '.content-list li',
             'title_selector' => '.title h3',
             'date_selector' => '.time',
-            'image' => 'images/tama.jpg'
         ]);
 
-        $artist5 = Artist::create([
+        $artist4 = Artist::create([
             'name' => '[ALEXANDROS]',
             'url' => 'https://alexandros.jp/contents/schedule',
             'selector' => '.schedule a',
             'title_selector' => 'span:nth-of-type(2)',
             'date_selector' => '.date',
-            'image' => 'images/tama.jpg'
+        ]);
+
+        $artist5 = Artist::create([
+            'name' => 'SiM',
+            'url' => 'http://sxixm.com/schedule/',
+            'selector' => '.contents_column_box',
+            'title_selector' => 'li:nth-of-type(1) span',
+            'date_selector' => 'li:nth-of-type(2) span',
         ]);
 
         $artist1->users()->attach($artist1->id);
         $artist2->users()->attach($artist2->id);
         $artist3->users()->attach($artist3->id);
+        $artist4->users()->attach($artist4->id);
         $artist5->users()->attach($artist5->id);
     }
 }
