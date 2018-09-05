@@ -30,4 +30,7 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     Route::get('crawler', 'CrawlerController@index')->name('crawler.index');
     Route::post('crawler', 'CrawlerController@artistStore')->name('crawler.artist.store');
     Route::post('image/upload', 'CrawlerController@imageUpload')->name('image.upload');
+
+    // アーティスト
+    Route::get('artist', 'ArtistController@index')->name('artist.index');
 });

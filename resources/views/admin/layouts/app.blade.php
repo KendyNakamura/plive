@@ -260,7 +260,7 @@ desired effect
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+            <li class="active"><a href="#"><i class="fa fa-link"></i> <span>リンク</span></a></li>
             <li><a href="{{ route('admin::crawler.index') }}"><i class="fa fa-link"></i> <span>クローラー確認</span></a></li>
             <li>
                 <a class="dropdown-item" href="#"
@@ -273,14 +273,14 @@ desired effect
                 </form>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                <a href="#"><i class="fa fa-link"></i> <span>アーティスト</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="{{ route('admin::crawler.index') }}">新規作成</a></li>
+            <li><a href="{{ route('admin::artist.index') }}">編集</a></li>
           </ul>
         </li>
       </ul>
