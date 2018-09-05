@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ArtistRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
@@ -20,7 +21,7 @@ class CrawlerController extends Controller
         return view('admin.crawler.index');
     }
 
-    public function artistStore(Request $request)
+    public function artistStore(ArtistRequest $request)
     {
         $name = $request->name;
         $url = $request->url;

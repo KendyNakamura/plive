@@ -26,10 +26,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-            @yield('header')
-        <div class="container">
-            <main class="py-4">
+<div id="app">
+    @yield('header')
+    <div class="container">
+        <main class="py-4">
             @if (session('result'))
                 <div class="alert alert-success" role="alert">
                     @if(is_array(session('result')))
@@ -37,13 +37,20 @@
                             {{ $result_item }}{!! $loop->last ? '' : '<br>' !!}
                         @endforeach
                     @else
-                        {{ session('result') }}
+                        {{ session('result') }}{!! $loop->last ? '' : '<br>' !!}
                     @endif
                 </div>
             @endif
-                @yield('content')
-            </main>
-        </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}
+                    @endforeach
+                </div>
+            @endif
+            @yield('content')
+        </main>
     </div>
+</div>
 </body>
 </html>

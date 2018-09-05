@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ArtistIndexRequest;
 use App\Http\Model\Artist;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +14,7 @@ class ArtistController extends Controller
         $this->middleware('auth')->only(['register', 'registerDelete']);
     }
 
-    public function index(Request $request)
+    public function index(ArtistIndexRequest $request)
     {
     	$artists = Artist::search($request);
     	return view('artist.index', ['artists' => $artists]);

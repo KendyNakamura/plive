@@ -7,4 +7,5 @@ return [
     'deleted' => '削除しました。',
     'profile' => 'プロフィール',
     'preview' => 'プレビュー',
+    'search' => '検索',
 ];

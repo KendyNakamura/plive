@@ -13,7 +13,7 @@
                     @if (Request::is('/'))
                         <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('artist.index') }}">
                             <input class="form-control mr-sm-2" type="search" name="artist_search" value="{{ request()->artist_search }}"placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">@lang('c.search')</button>
                         </form>
                     @endif
                     @guest
