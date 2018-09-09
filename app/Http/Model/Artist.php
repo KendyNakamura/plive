@@ -13,7 +13,6 @@ class Artist extends Model
         'selector',
         'title_selector',
         'date_selector',
-        'image',
     ];
 
 	public function lives()
@@ -34,6 +33,6 @@ class Artist extends Model
             $query->where('name', 'like', "%{$request->artist_search}%");
         }
 
-        return $query->paginate(10);
+        return $query->paginate(30);
     }
 }

@@ -8,12 +8,12 @@
             {{ Breadcrumbs::render('Home') }}
             <div class="row">
                 @foreach($artists as $artist)
-                    <div class="col-md-3 block border text-center">
+                    <div class="col-md-3 block text-center">
                         <a href="{{ route('artist.show', $artist) }}">
                             <img class="logo" src="{{ asset('storage/images/' . $artist->name . '/main.jpg') }}" alt="logo" width="150px" height="150px">
                             <p>{{ $artist->name }}</p>
                         </a>
-                        <p><a href="{{ $artist->url }}" target="_blank">アーティストページへ</a></p>
+                        <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
                     </div>
                 @endforeach
             </div>
