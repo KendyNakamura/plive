@@ -64,6 +64,11 @@ class ArtistController extends Controller
             return view('admin.crawler.index');
         }
 
+        if(!is_null($request->file('main')))
+        {
+            $request->file('main')->storeAs('public/images/'. $request->name, 'main.jpg');
+        }
+
         $artist->fill($request->all())->save();
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.updated'));
     }

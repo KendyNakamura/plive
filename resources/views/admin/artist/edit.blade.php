@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="box box-solid">
-                <form id="artist_save_form" action="{{ route('admin::artist.update', $artist)}}" method="post">
+                <form id="artist_save_form" action="{{ route('admin::artist.update', $artist)}}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -42,6 +42,10 @@
                                 <span class="help-block">{{ $errors->first('date_selector') }}</span>
                             @endif
                         </div>
+
+                        <img src="{{ asset('storage/images/' . $artist->name . '/main.jpg') ?? asset('storage/images/no.jpg') }}" width="250px" height="250px"><br />
+                        <input type="file" name='main'><br/>
+
                     </div>
                     <div class="box-footer">
                         <button class="btn btn-primary" name="action" value="save" onclick="this.form.target='_top'">@lang('c.save')</button>
@@ -50,154 +54,5 @@
                 </form>
             </div>
         </div>
-
-        {{--画像アップロード--}}
-        <div class="col-sm-6">
-            <!-- サーバへ送信する内容を入力する。 -->
-            テキスト：<input type="text" id="text"><br/>
-            ファイル：<input type="file" id="file"><br/>
-            <button type="submit" onclick="send();">送信</button>
-
-            <!-- サーバから受けた内容を表示する。 -->
-            <ul id="file_list">
-                <li class="each_file">
-                    <input type="file" class="input_file" name="img_file" value="" accept="image/*">
-                </li>
-            </ul>
-            <div id="main">
-
-            </div>
-        </div>
     </div>
 @endsection
-<script>
-    function send(){
-
-        //ajaxでのcsrfトークン送信
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        //テキストの入力値を取得する。
-        var textData = $("#text").val();
-
-        //アップロードファイルの入力値を取得する。
-        var fileData = document.getElementById("file").files[0];
-
-        //フォームデータを作成する。(送信するデータ)
-        var form = new FormData();
-
-        //フォームデータにテキストの内容、アップロードファイルの内容を格納する。
-        form.append( "text", textData );
-        form.append( "file", fileData );
-
-        //ポスト送信する。
-        $.ajax({
-            type: 'post',
-            url: "{{ route('admin::image.upload') }}",
-            data: form,
-            processData : false,
-            contentType : false,
-
-            //成功の場合、以下を行う。
-            success: function(data){
-                $("#main").append('保存しました。');
-            },
-
-            //失敗の場合、以下を行う。
-            error : function(){
-                alert('通信ができない状態です。');
-            }
-        });
-    }
-
-    $('#upload').on('click','input[name="hoge"]',function(){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        // ※3
-        var fd = new FormData();
-        if ($("input[name='hoge']").val()!== '') {
-            fd.append( "file", $("input[name='hoge']").prop("files")[0] );
-        }
-        var postData = {
-            type : "POST",
-            dataType : "text",
-            data : fd,
-            processData : false,
-            contentType : false
-        };
-        $.ajax(
-            "{{ route('admin::image.upload') }}", postData
-        ).done(function( text ){
-            console.log(text);
-        });
-    });
-
-    // inputタグに画像が追加された場合の処理
-    $fileList.on('change.inputFile', '#main', function(e) {
-        var $input = $(this),
-            $li = $input.closest('.each_file'),
-            $newLi = $li.clone();
-        $fileList.append($newLi);
-        //サムネイル画像を表示する処理
-        var file = e.target.files[0],
-            fileName = file.name;
-        //FileReaderオブジェクトの生成
-        reader = new FileReader();
-        reader.readAsDataURL(file);
-
-        reader.onloadend = function () {
-            var fileReader = this;
-            if (fileReader.result) {
-                var thumb = '<div class = "thumbnail"><img src = "' + fileReader.result + '" width = "150px" style = "max-width: 150px;">' + fileName + '<button class = "delete_btn">削除</button></div>';
-                $li.append(thumb);
-            }
-            return this;
-        };
-        $input.hide();
-    });
-
-    //画像が3つになった場合にinputタグを非表示にする処理
-    // var $fileListLI = $('#file_list li input[name=img_file]');
-    // var inputFileNum = $fileListLI.length;
-    // var lastInputFile = $fileListLI.eq(-1);
-    // if (inputFileNum == 4){
-    //     $(lastInputFile).hide();
-    // }
-
-    {{--function image_upload(){--}}
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-        {{--//Ajaxで飛ばすdata（FromDataオブジェクト）を生成する処理--}}
-        {{--var fd = new FormData();--}}
-        {{--//画像が選択されるinputタグは必ず最後から2番目--}}
-        {{--var $fileListLI = $('#file_list li input[name=img_file]');--}}
-        {{--var targetFile = $fileListLI.eq(-1);--}}
-        {{--//1画像毎のUPなので[0]、複数である場合は[1][2]...--}}
-        {{--fd.append( "file", $('#img_file').prop("files")[0]);--}}
-
-        {{--$.ajax({--}}
-            {{--url: "{{ route('admin::image.upload') }}",--}}
-            {{--type: 'post',--}}
-            {{--dataType: 'json',--}}
-            {{--data: fd,--}}
-            {{--processData: false,--}}
-            {{--contentType: false--}}
-        {{--})--}}
-            {{--.done(function(res){--}}
-                {{--console.log(res);--}}
-            {{--})--}}
-            {{--.fail(function(jqXHR, statusText, errorThrown){--}}
-                {{--console.log(errorThrown);--}}
-            {{--});--}}
-        {{--return this;--}}
-    // }
-</script>

@@ -59,10 +59,10 @@ class CrawlerController extends Controller
             return view('admin.crawler.index');
         }
 
-//        if(!is_null($request->file('main_file')))
-//        {
+        if(!is_null($request->file('main')))
+        {
             $request->file('main')->storeAs('public/images/'. $request->name, 'main.jpg');
-//        },
+        }
 
         // アーティストとライブ保存
         $artist = Artist::create($request->all());
