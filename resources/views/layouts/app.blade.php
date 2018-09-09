@@ -37,7 +37,7 @@
                             {{ $result_item }}{!! $loop->last ? '' : '<br>' !!}
                         @endforeach
                     @else
-                        {{ session('result') }}{!! $loop->last ? '' : '<br>' !!}
+                        {{ session('result') }}
                     @endif
                 </div>
             @endif

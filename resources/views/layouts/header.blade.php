@@ -26,7 +26,7 @@
                     @else
                         <li class="nav-item">
                             <a class="dropdown-item" href="{{ route('index') }}">
-                                {{ __('c.profile') }}
+                                {{ Auth::user()->name }}
                             </a>
                         </li>
                         <li class="nav-item">
