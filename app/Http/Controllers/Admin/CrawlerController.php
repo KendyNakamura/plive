@@ -59,6 +59,11 @@ class CrawlerController extends Controller
             return view('admin.crawler.index');
         }
 
+//        if(!is_null($request->file('main_file')))
+//        {
+            $request->file('main')->storeAs('public/images/'. $request->name, 'main.jpg');
+//        },
+
         // アーティストとライブ保存
         $artist = Artist::create($request->all());
 
@@ -77,28 +82,17 @@ class CrawlerController extends Controller
         return redirect(route('admin::crawler.index'))->with('result', __('c.saved'));
     }
 
-    public function imageUpload(Request $request)
+    public function imageUpload(Request $request, Artist $artist)
     {
         //アップロードパスを指定する。(storage/images)
-        $upload_file_path = 'storage/images/';
+        $upload_file_path = 'storage/images/'. $artist->name;
 
-        //テキストの入力値を受け取る。
-        $result = $request->has('text');
-        if ($result) {
-            $text = $request->input('text');
-        }
-
-        $image_name = ceil(microtime(true)*1000) . '.jpg';
+        $image_name = 'main.jpg';
         //アップロードファイルを受け取る。
         $result = $request->file('file')->isValid();
         if($result){
-
             //ファイルを格納する。
             $file = $request->file('file')->move($upload_file_path , $image_name);
         }
-
-        return $text;
-        //テキストの内容を付与してhtml(test.blade.php)を返却する。
-//        return view('admin.crawler.index')->with("ret", $text);
     }
 }
