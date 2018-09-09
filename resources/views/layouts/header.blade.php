@@ -25,7 +25,7 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="dropdown-item" href="{{ route('profile') }}">
+                            <a class="dropdown-item" href="{{ route('index') }}">
                                 {{ __('c.profile') }}
                             </a>
                         </li>

@@ -22,6 +22,14 @@ class UsersTableSeeder extends Seeder
             }
         }
 
+        App\User::create(
+            [
+                'name' => 'Kenji Nakamura',
+                'email' => 'kenji@gmail.com',
+                'password' => bcrypt('1qaz2wsx'),
+            ]
+        );
+
         App\Http\Model\Admin::create(
             [
                 'name' => 'Kenji Nakamura',

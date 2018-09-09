@@ -21,6 +21,7 @@ class LiveTest extends DuskTestCase
         $artist = factory(Artist::class)->create();
         $live = Live::create([
             'title' => 'ライブタイトル',
+            'date' => '2018.9.1',
             'artist_id' => $artist->id,
         ]);
 
