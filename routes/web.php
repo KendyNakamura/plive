@@ -33,4 +33,6 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
 
     // アーティスト
     Route::get('artist', 'ArtistController@index')->name('artist.index');
+    Route::get('artist/{artist}', 'ArtistController@edit')->name('artist.edit');
+    Route::post('artist/{artist}', 'ArtistController@update')->name('artist.update');
 });
