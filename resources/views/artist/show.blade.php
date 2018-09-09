@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-12 text-center">
-            <img class="logo" src="/storage/{{ $artist->image }}" alt="logo" width="150px" height="150px">
+            <img class="logo" src="{{ asset('storage/images/' . $artist->name . '/main.jpg') }}" alt="logo" width="300px" height="300px">
             <p>{{ $artist->name }}</p>
             <p><a href="{{ $artist->url }}" target="_blank">アーティストページへ</a></p>
         </div>
