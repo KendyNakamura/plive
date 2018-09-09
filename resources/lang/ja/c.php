@@ -9,4 +9,5 @@ return [
     'profile' => 'プロフィール',
     'preview' => 'プレビュー',
     'search' => '検索',
+    'error' => 'エラー',
 ];

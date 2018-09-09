@@ -29,14 +29,14 @@ class ArtistController extends Controller
 
     public function update(ArtistRequest $request, Artist $artist)
     {
-        // プレビュー
         $name = $request->name;
         $url = $request->url;
         $client = new Client();
         $crawler = $client->request('GET', $url);
+        // プレビュー
         if ($request->action == "preview")
         {
-            if ($crawler) {
+            if ($request->selector) {
                 $crawler->filter($request->selector)->each(function ($li) use ($request) {
                     if ($li && $request->date_selector && $request->title_selector) {
                         $date = preg_replace("/\//", ".", $li->filter($request->date_selector)->text());
@@ -50,7 +50,7 @@ class ArtistController extends Controller
                         echo '<br/>';
                         echo '<br/>';
                     } else {
-                        echo 'セレクタが有効ではありません。';
+                        echo 'セレクタが有効ではありません。<br />';
                     }
                 });
 
@@ -61,7 +61,7 @@ class ArtistController extends Controller
                     ]
                 );
             }
-            return view('admin.crawler.index');
+            return redirect(route('admin::artist.edit', $artist))->with('result', __('c.error'));
         }
 
         if(!is_null($request->file('main')))

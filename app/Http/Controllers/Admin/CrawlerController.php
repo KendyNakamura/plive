@@ -27,11 +27,10 @@ class CrawlerController extends Controller
         $url = $request->url;
         $client = new Client();
         $crawler = $client->request('GET', $url);
-
         // プレビュー
         if ($request->action == "preview")
         {
-            if ($crawler) {
+            if ($request->selector) {
                 $crawler->filter($request->selector)->each(function ($li) use ($request) {
                     if ($li && $request->date_selector && $request->title_selector) {
                         $date = preg_replace("/\//", ".", $li->filter($request->date_selector)->text());
@@ -56,7 +55,7 @@ class CrawlerController extends Controller
                     ]
                 );
             }
-            return view('admin.crawler.index');
+            return view('admin.crawler.index')->with('result', __('c.error'));
         }
 
         if(!is_null($request->file('main')))
@@ -80,19 +79,5 @@ class CrawlerController extends Controller
         });
 
         return redirect(route('admin::crawler.index'))->with('result', __('c.saved'));
-    }
-
-    public function imageUpload(Request $request, Artist $artist)
-    {
-        //アップロードパスを指定する。(storage/images)
-        $upload_file_path = 'storage/images/'. $artist->name;
-
-        $image_name = 'main.jpg';
-        //アップロードファイルを受け取る。
-        $result = $request->file('file')->isValid();
-        if($result){
-            //ファイルを格納する。
-            $file = $request->file('file')->move($upload_file_path , $image_name);
-        }
     }
 }
