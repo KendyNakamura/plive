@@ -4,12 +4,13 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12 block">
-            <h2>{{ Auth::user()->name }}</h2>
+        <div class="col-md-6 block">
             <h2>登録アーティスト</h2>
+            <ul class="register-list">
             @foreach(Auth::user()->artists as $artist)
-                <a href="{{ route('artist.show', $artist) }}"><p>{{ $artist->name }}</p></a>
+                    <li><a href="{{ route('artist.show', $artist) }}">{{ $artist->name }}</a></li>
             @endforeach
+            </ul>
         </div>
     </div>
 @endsection
