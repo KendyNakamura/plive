@@ -27,14 +27,14 @@ class ArtistController extends Controller
 
     public function register(Request $request, Artist $artist)
     {
-        $artist->users()->attach($request->users);
+        $artist->users()->attach($request->register);
 
         return redirect(route('artist.show', $artist))->with('result', __('c.registered'));
     }
 
     public function registerDelete(Request $request, Artist $artist)
     {
-        $artist->users()->detach($request->users);
+        $artist->users()->detach($request->delete);
 
         return redirect(route('artist.show', $artist))->with('result', __('c.deleted'));
     }
