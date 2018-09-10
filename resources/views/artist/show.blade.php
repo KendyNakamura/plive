@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-12 text-center">
-            <img class="logo" src="{{ asset('storage/images/' . $artist->name . '/main.jpg') }}" alt="logo" width="300px" height="300px">
+            <img class="logo" src="{{ $artist->img_url }}" alt="logo" width="300px" height="300px">
             <p>{{ $artist->name }}</p>
             <p><a href="{{ $artist->url }}" target="_blank">アーティストページへ</a></p>
         </div>
@@ -30,12 +30,19 @@
         </div>
     </div>
     @if (Auth::user())
-        <form role="form" class="form" method="POST" action="{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? route('artist.register', $artist) : route('artist.register.delete', $artist) }}">
-            {{ csrf_field() }}
-            <input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">
-            <input type="submit" class="btn btn-primary" value="{{ ($artist->users()->get()->where('id', Auth::user()->id) == '[]') ? '登録する' : '登録済'}}">
-        </form>
+        @if ($artist->artist_register == '[]')
+            <form role="form" class="form" method="POST" action="{{route('artist.register', $artist) }}">
+                {{ csrf_field() }}
+                <input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">
+                <input type="submit" class="btn btn-primary" value="{{ '登録する' }}">
+            </form>
+        @else
+            <form role="form" class="form" method="POST" action="{{route('artist.register.delete', $artist) }}">
+                {{ csrf_field() }}
+                <input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">
+                <input type="submit" class="btn btn-primary" value="{{ '登録済'}}">
+            </form>
+        @endif
     @endif
 @endsection
 
-@include('layouts.footer')

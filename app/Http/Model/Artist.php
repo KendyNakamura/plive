@@ -5,6 +5,7 @@ namespace App\Http\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class Artist extends Model
 {
@@ -26,6 +27,7 @@ class Artist extends Model
         return $this->belongsToMany('App\User');
     }
 
+    // 検索条件
     public static function search(Request $request)
     {
         $query = Artist::query();
@@ -37,6 +39,7 @@ class Artist extends Model
         return $query->paginate(30);
     }
 
+    // アーティスト画像のURL取得
     public function getImgUrlAttribute()
     {
         if($this->has_img)
@@ -46,8 +49,15 @@ class Artist extends Model
         return asset('storage/images/no.jpeg');
     }
 
+    // 画像が登録されているかどうか
     public function getHasImgAttribute()
     {
         return Storage::disk('public')->exists('images/' . $this->name . '/main.jpg');
+    }
+
+    // アーティストを登録しているかどうか
+    public function getArtistRegisterAttribute()
+    {
+        return $this->users()->get()->where('id', Auth::user()->id);
     }
 }
