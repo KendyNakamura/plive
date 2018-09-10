@@ -32,24 +32,15 @@
     @if (Auth::user())
         <input id="artistId" type="hidden" name="register" value="{{ Auth::user()->id ?? ''}}">
         @if ($artist->artist_register == '[]')
-            {{--<form role="form" class="form" method="POST" action="{{route('artist.register', $artist) }}">--}}
-                {{--{{ csrf_field() }}--}}
             <button id="artistRegister" class="btn btn-primary">登録する</button>
-                {{--<input id="artistRegister" type="submit" class="btn btn-primary" value="{{ '登録する' }}">--}}
-            {{--</form>--}}
         @else
-            {{--<form role="form" class="form" method="POST" action="{{route('artist.register.delete', $artist) }}">--}}
-                {{--{{ csrf_field() }}--}}
-                {{--<input type="hidden" name="users" value="{{ Auth::user()->id ?? ''}}">--}}
             <button id="artistDelete" class="btn btn-danger">登録解除</button>
-                {{--<input id="artistDelete" type="submit" class="btn btn-primary" value="{{ '登録済' }}">--}}
-            {{--</form>--}}
         @endif
     @endif
     <script>
         $(function(){
             $id = $('#artistId').val();
-            $('#artistRegister').on('click',function(){
+            $(document).on('click', '#artistRegister',function(){
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -60,14 +51,15 @@
                     type:'POST',
                     data:{'register': $id}
                 }).done( (data) => {
-                    alert('登録しました');
+                    $('#artistRegister').after('<button id="artistDelete" class="btn btn-danger">登録解除</button>');
+                    $('#artistRegister').remove();
                 }).fail( (data) => {
                     $('.result').html(data);
                     console.log(data);
                 }).always( (data) => {
                 });
             });
-            $('#artistDelete').on('click',function(){
+            $(document).on('click', '#artistDelete',function(){
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -78,7 +70,8 @@
                     type:'POST',
                     data:{'delete':$id}
                 }).done( (data) => {
-                    alert('削除しました');
+                    $('#artistDelete').after('<button id="artistRegister" class="btn btn-primary">登録する</button>');
+                    $('#artistDelete').remove();
                 }).fail( (data) => {
                     $('.result').html(data);
                     console.log(data);

@@ -29,13 +29,13 @@ class ArtistController extends Controller
     {
         $artist->users()->attach($request->register);
 
-        return redirect(route('artist.show', $artist))->with('result', __('c.registered'));
+        return redirect(route('artist.show', $artist));
     }
 
     public function registerDelete(Request $request, Artist $artist)
     {
         $artist->users()->detach($request->delete);
 
-        return redirect(route('artist.show', $artist))->with('result', __('c.deleted'));
+        return redirect(route('artist.show', $artist));
     }
 }
