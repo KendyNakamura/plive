@@ -4,6 +4,7 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Artist extends Model
 {
@@ -34,5 +35,19 @@ class Artist extends Model
         }
 
         return $query->paginate(30);
+    }
+
+    public function getImgUrlAttribute()
+    {
+        if($this->has_img)
+        {
+            return Storage::url('images/' . $this->name . '/main.jpg');
+        }
+        return asset('storage/images/no.jpeg');
+    }
+
+    public function getHasImgAttribute()
+    {
+        return Storage::disk('public')->exists('images/' . $this->name . '/main.jpg');
     }
 }

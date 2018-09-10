@@ -10,7 +10,7 @@
                 @foreach($artists as $artist)
                     <div class="col-md-3 block text-center">
                         <a href="{{ route('artist.show', $artist) }}">
-                            <img class="logo" src="{{ asset('storage/images/' . $artist->name . '/main.jpg') }}" alt="logo" width="150px" height="150px">
+                            <img class="logo" src="{{ $artist->img_url }}" alt="logo" width="150px" height="150px">
                             <p>{{ $artist->name }}</p>
                         </a>
                         <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
