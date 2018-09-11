@@ -46,7 +46,7 @@ class Artist extends Model
         {
             return Storage::url('images/' . $this->name . '/main.jpg');
         }
-        return asset('storage/images/no.jpeg');
+        return asset('storage/images/no.jpg');
     }
 
     // 画像が登録されているかどうか
