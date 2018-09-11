@@ -18,9 +18,9 @@
                 @if (Auth::user())
                     <input id="artistId" type="hidden" name="register" value="{{ Auth::user()->id ?? ''}}">
                     @if ($artist->artist_register == '[]')
-                        <button id="artistRegister" class="btn btn-primary">登録する</button>
+                        <button id="artistRegister" class="btn btn-primary">@lang('c.register')</button>
                     @else
-                        <button id="artistDelete" class="btn btn-danger">登録解除</button>
+                        <button id="artistDelete" class="btn btn-danger">@lang('c.register_release')</button>
                     @endif
                 @endif
             </div>
@@ -61,7 +61,7 @@
                     type:'POST',
                     data:{'register': $id}
                 }).done( (data) => {
-                    $('#artistRegister').after('<button id="artistDelete" class="btn btn-danger">登録解除</button>');
+                    $('#artistRegister').after('<button id="artistDelete" class="btn btn-danger">@lang('c.register_release')</button>');
                     $('#artistRegister').remove();
                 }).fail( (data) => {
                     $('.result').html(data);
@@ -80,7 +80,7 @@
                     type:'POST',
                     data:{'delete':$id}
                 }).done( (data) => {
-                    $('#artistDelete').after('<button id="artistRegister" class="btn btn-primary">登録する</button>');
+                    $('#artistDelete').after('<button id="artistRegister" class="btn btn-primary">@lang('c.register')</button>');
                     $('#artistDelete').remove();
                 }).fail( (data) => {
                     $('.result').html(data);

@@ -28,7 +28,7 @@ class ArtistRegisterTest extends DuskTestCase
 
         $user = factory(User::class)->create();
 
-//        ログイン後、登録ボタンが現れる。登録後に登録済に変わる
+//        ログイン後、登録ボタンが現れる。登録後に登録解除に変わる
         $this->browse(function ($browser) use ($user, $artist) {
             $browser->visit('/login')
                 ->type('email', $user->email)
@@ -36,11 +36,13 @@ class ArtistRegisterTest extends DuskTestCase
                 ->press('Login')
                 ->assertPathIs('/')
                 ->visit('/artist/' . $artist->id)
-                ->press('登録する')
+                ->click('#artistRegister')
+                ->waitForText(__('c.register_release'))
                 ->visit('/profile')
                 ->assertSee($user->artists->where('id', $user->id)->first()->name)
                 ->visit('/artist/' . $artist->id)
-                ->press('登録済')
+                ->click('#artistDelete')
+                ->waitForText(__('c.register'))
                 ->visit('/profile')
                 ->assertDontSee($user->artists->where('id', $user->id)->first()->name);
         });
