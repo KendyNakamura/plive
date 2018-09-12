@@ -18,9 +18,11 @@
                 @if (Auth::user())
                     <input id="artistId" type="hidden" name="register" value="{{ Auth::user()->id ?? ''}}">
                     @if ($artist->artist_register == '[]')
-                        <button id="artistRegister" class="btn btn-primary">@lang('c.register')</button>
+                        <a href="javascript:void(0)" id="artistRegister"><i class="far fa-heart"></i>@lang('c.register')</a>
+                        {{--<button id="artistRegister" class="btn btn-primary">@lang('c.register')</button>--}}
                     @else
-                        <button id="artistDelete" class="btn btn-danger">@lang('c.register_release')</button>
+                        <a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>
+{{--                        <button id="artistDelete" class="btn btn-danger">@lang('c.register_release')</button>--}}
                     @endif
                 @endif
             </div>
@@ -61,7 +63,7 @@
                     type:'POST',
                     data:{'register': $id}
                 }).done( (data) => {
-                    $('#artistRegister').after('<button id="artistDelete" class="btn btn-danger">@lang('c.register_release')</button>');
+                    $('#artistRegister').after('<a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>');
                     $('#artistRegister').remove();
                 }).fail( (data) => {
                     $('.result').html(data);
@@ -80,7 +82,7 @@
                     type:'POST',
                     data:{'delete':$id}
                 }).done( (data) => {
-                    $('#artistDelete').after('<button id="artistRegister" class="btn btn-primary">@lang('c.register')</button>');
+                    $('#artistDelete').after('<a href="javascript:void(0)" id="artistRegister"><i class="far fa-heart"></i>@lang('c.register')</a>');
                     $('#artistDelete').remove();
                 }).fail( (data) => {
                     $('.result').html(data);
