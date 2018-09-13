@@ -35,6 +35,8 @@ class Live extends Model
                 $live->save();
             }
         });
+
+        return true;
     }
 
     public static function crawlerPreview($request)
