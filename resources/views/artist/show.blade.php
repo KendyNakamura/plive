@@ -12,7 +12,7 @@
                     <img class="logo" src="{{ $artist->img_url }}" alt="logo" width="300px" height="300px">
                     <h2>{{ $artist->name }}</h2>
                     <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
-                    <p>登録者数　{{ $artist->users()->count() }}</p>
+                    <p>登録者数　<span>{{ $artist->users()->count() }}</span></p>
                 </div>
             </div>
             <div class="box-footer">

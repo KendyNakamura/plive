@@ -7,6 +7,7 @@ use App\Http\Requests\ArtistRequest;
 use App\Http\Requests\ArtistIndexRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Artist;
+use App\Http\Model\Live;
 use Goutte\Client;
 
 class ArtistController extends Controller
@@ -30,34 +31,15 @@ class ArtistController extends Controller
     public function update(ArtistRequest $request, Artist $artist)
     {
         $name = $request->name;
-        $url = $request->url;
-        $client = new Client();
-        $crawler = $client->request('GET', $url);
         // プレビュー
         if ($request->action == "preview")
         {
             if ($request->selector) {
-                $crawler->filter($request->selector)->each(function ($li) use ($request) {
-                    if ($li && $request->date_selector && $request->title_selector) {
-                        $date = preg_replace("/\//", ".", $li->filter($request->date_selector)->text());
-                        echo $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
-
-                        echo '<br/>';
-
-                        $title = preg_replace("/ |　/", "", $li->filter($request->title_selector)->text());
-                        echo $t = preg_replace("/.+\..+\(.+\)/", "", $title);
-
-                        echo '<br/>';
-                        echo '<br/>';
-                    } else {
-                        echo 'セレクタが有効ではありません。<br />';
-                    }
-                });
-
+                Live::crawlerPreview($request);
                 return view(('admin.crawler.preview'),
                     [
                         'name' => $name,
-                        'url' => $url,
+                        'url' => $request->url,
                     ]
                 );
             }
