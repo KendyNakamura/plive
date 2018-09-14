@@ -38,7 +38,10 @@ class Kernel extends ConsoleKernel
                         $title = preg_replace("/ |　/", "", $li->filter($artist->title_selector)->text());
                         $live->title = preg_replace("/.+\..+\(.+\)/", "", $title);
                         $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
-                        $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
+                        $date2 = preg_replace("/(\s+|\n|\r|\r\n)/", "", $date);
+                        preg_match("/\d+\.\d+\.\d+/", $date2,$date3 );
+                        $live->date = $date3[0] ?? "";
+//                        $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\)|\[.+\n.+)/", "", $date);
                         $live->artist_id = $artist->id;
                         if (empty($artist->lives->where('title', $live->title)->first()) && $li) {
                             $live->save();
@@ -46,7 +49,8 @@ class Kernel extends ConsoleKernel
                     }
                 });
             }
-        })->dailyAt('3:00')
+        })
+//        })->dailyAt('3:00')
             ->after(function () {
                 echo 'finish';
             });

@@ -30,7 +30,7 @@ class Live extends Model
                 $title = preg_replace("/ |　/", "", $li->filter($artist->title_selector)->text());
                 $live->title = preg_replace("/.+\..+\(.+\)/", "", $title);
                 $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
-                $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
+                $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))([\s+)/", "", $date);
                 $live->artist_id = $artist->id;
                 $live->save();
             }
