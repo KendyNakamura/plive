@@ -27,6 +27,11 @@ class Artist extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Http\Model\Tag');
+    }
+
     // 検索条件
     public static function search(Request $request)
     {
