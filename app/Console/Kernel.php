@@ -41,7 +41,6 @@ class Kernel extends ConsoleKernel
                         $date2 = preg_replace("/(\s+|\n|\r|\r\n)/", "", $date);
                         preg_match("/\d+\.\d+\.\d+/", $date2,$date3 );
                         $live->date = $date3[0] ?? "";
-//                        $live->date = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\)|\[.+\n.+)/", "", $date);
                         $live->artist_id = $artist->id;
                         if (empty($artist->lives->where('title', $live->title)->first()) && $li) {
                             $live->save();
