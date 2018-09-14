@@ -7,7 +7,7 @@ use App\Http\Requests\ArtistRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
-use Goutte\Client;
+use App\Http\Model\Tag;
 
 class CrawlerController extends Controller
 {
@@ -18,7 +18,9 @@ class CrawlerController extends Controller
 
     public function index(Request $request)
     {
-        return view('admin.crawler.index');
+        return view('admin.crawler.index', [
+            'tags' => Tag::all(),
+        ]);
     }
 
     public function artistStore(ArtistRequest $request)
@@ -46,8 +48,9 @@ class CrawlerController extends Controller
 
         // アーティストとライブ保存
         $artist = Artist::create($request->all());
+        $artist->tags()->sync($request->tags);
 
-        Live::crawlerSave($request, $artist);
+//        Live::crawlerSave($request, $artist);
         return redirect(route('admin::crawler.index'))->with('result', __('c.saved'));
     }
 }
