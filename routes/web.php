@@ -35,4 +35,11 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     Route::get('artist', 'ArtistController@index')->name('artist.index');
     Route::get('artist/{artist}', 'ArtistController@edit')->name('artist.edit');
     Route::post('artist/{artist}', 'ArtistController@update')->name('artist.update');
+
+    // タグ
+    Route::get('tag', 'TagController@index')->name('tag.index');
+    Route::get('tag/create', 'TagController@create')->name('tag.create');
+    Route::post('tag/create', 'TagController@store')->name('tag.store');
+    Route::get('tag/{tag}', 'TagController@edit')->name('tag.edit');
+    Route::post('tag/{tag}', 'TagController@update')->name('tag.update');
 });

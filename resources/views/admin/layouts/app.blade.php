@@ -277,14 +277,25 @@ desired effect
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="{{ route('admin::crawler.index') }}">新規作成</a></li>
-            <li><a href="{{ route('admin::artist.index') }}">編集</a></li>
-          </ul>
-        </li>
-      </ul>
-      <!-- /.sidebar-menu -->
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin::crawler.index') }}">新規作成</a></li>
+                    <li><a href="{{ route('admin::artist.index') }}">編集</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-link"></i> <span>タグ</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin::tag.index') }}">新規作成</a></li>
+                    <li><a href="{{ route('admin::tag.index') }}">編集</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
   </aside>
