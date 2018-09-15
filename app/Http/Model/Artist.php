@@ -19,7 +19,7 @@ class Artist extends Model
 
 	public function lives()
     {
-    	return $this->hasMany('App\Http\Model\live');
+    	return $this->hasMany('App\Http\Model\Live');
     }
 
     public function users()
