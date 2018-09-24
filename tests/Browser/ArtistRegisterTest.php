@@ -30,6 +30,7 @@ class ArtistRegisterTest extends DuskTestCase
 
 //        ログイン後、登録ボタンが現れる。登録後に登録解除に変わる
         $this->browse(function ($browser) use ($user, $artist) {
+            $browser->script('window.scrollTo(0, 400);');
             $browser->visit('/login')
                 ->type('email', $user->email)
                 ->type('password', 'secret')
