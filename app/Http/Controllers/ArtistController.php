@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArtistIndexRequest;
 use App\Http\Model\Artist;
+use App\Http\Model\Tag;
 use App\Http\Controllers\Controller;
 
 class ArtistController extends Controller
@@ -17,7 +18,7 @@ class ArtistController extends Controller
     public function index(ArtistIndexRequest $request)
     {
     	$artists = Artist::search($request);
-    	return view('artist.index', ['artists' => $artists]);
+    	return view('artist.index', ['artists' => $artists, 'tags' => Tag::all()]);
     }
 
     public function show(Artist $artist)
