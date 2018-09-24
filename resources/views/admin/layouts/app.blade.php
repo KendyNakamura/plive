@@ -261,7 +261,7 @@ desired effect
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#"><i class="fa fa-link"></i> <span>リンク</span></a></li>
-            <li><a href="{{ route('admin::crawler.index') }}"><i class="fa fa-link"></i> <span>クローラー確認</span></a></li>
+            {{--<li><a href="{{ route('admin::crawler.index') }}"><i class="fa fa-link"></i> <span>クローラー確認</span></a></li>--}}
             <li>
                 <a class="dropdown-item" href="#"
                    onclick="event.preventDefault();
@@ -273,21 +273,25 @@ desired effect
                 </form>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>アーティスト</span>
+                <a href="#">
+                    <i class="fa fa-link"></i>
+                    <span>アーティスト</span>
                     <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin::crawler.index') }}">新規作成</a></li>
+                    <li><a href="{{ route('admin::artist.create') }}">新規作成</a></li>
                     <li><a href="{{ route('admin::artist.index') }}">編集</a></li>
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link"></i> <span>タグ</span>
+                <a href="#">
+                    <i class="fa fa-link"></i>
+                    <span>タグ</span>
                     <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('admin::tag.create') }}">新規作成</a></li>

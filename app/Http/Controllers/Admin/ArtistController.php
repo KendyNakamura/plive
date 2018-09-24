@@ -21,7 +21,47 @@ class ArtistController extends Controller
     public function index(ArtistIndexRequest $request)
     {
         $artists = Artist::search($request);
-        return view('admin.artist.index', ['artists' => $artists]);
+        return view('admin.artist.index', [
+            'artists' => $artists,
+        ]);
+    }
+
+    public function create(Request $request)
+    {
+        return view('admin.artist.create', [
+            'tags' => Tag::all(),
+        ]);
+    }
+
+    public function store(ArtistRequest $request)
+    {
+        $name = $request->name;
+        // プレビュー
+        if ($request->action == "preview")
+        {
+            if ($request->selector) {
+                Live::crawlerPreview($request);
+                return view(('admin.crawler.preview'),
+                    [
+                        'name' => $name,
+                        'url' => $request->url,
+                    ]
+                );
+            }
+            return view('admin.artist.create')->with('result', __('c.error'));
+        }
+
+        if(!is_null($request->file('main')))
+        {
+            $request->file('main')->storeAs('public/images/'. $request->name, 'main.jpg');
+        }
+
+        // アーティストとライブ保存
+        $artist = Artist::create($request->all());
+        $artist->tags()->sync($request->tags);
+
+//        Live::crawlerSave($request, $artist);
+        return redirect(route('admin::artist.create'))->with('result', __('c.saved'));
     }
 
     public function edit(Artist $artist)

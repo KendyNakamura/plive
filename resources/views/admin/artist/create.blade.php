@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <form id="artist_save_form" action="{{ route('admin::crawler.artist.store') }}" method="post" enctype="multipart/form-data">
+    <form id="artist_save_form" action="{{ route('admin::artist.store') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="box box-solid">
             <div class="box-body">
