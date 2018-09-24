@@ -8,6 +8,7 @@ use App\Http\Requests\ArtistIndexRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
+use App\Http\Model\Tag;
 use Goutte\Client;
 
 class ArtistController extends Controller
@@ -25,7 +26,7 @@ class ArtistController extends Controller
 
     public function edit(Artist $artist)
     {
-        return view('admin.artist.edit', ['artist' => $artist]);
+        return view('admin.artist.edit', ['artist' => $artist, 'tags' => Tag::all()]);
     }
 
     public function update(ArtistRequest $request, Artist $artist)
@@ -52,6 +53,7 @@ class ArtistController extends Controller
         }
 
         $artist->fill($request->all())->save();
+        $artist->tags()->sync($request->tags);
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.updated'));
     }
 }
