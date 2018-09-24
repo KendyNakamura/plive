@@ -290,7 +290,7 @@ desired effect
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ route('admin::tag.index') }}">新規作成</a></li>
+                    <li><a href="{{ route('admin::tag.create') }}">新規作成</a></li>
                     <li><a href="{{ route('admin::tag.index') }}">編集</a></li>
                 </ul>
             </li>

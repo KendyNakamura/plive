@@ -68,7 +68,6 @@
             <button class="btn btn-warning" name="action" value="preview" onclick="this.form.target='_blank'">@lang('c.preview')</button>
         </div>
     </form>
-    </div>
     <script>
         $(function () {
             $('.button-checkbox').each(function () {
