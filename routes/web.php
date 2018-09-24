@@ -27,19 +27,21 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     Route::get('/', 'HomeController@index')->name('index');
 
     // クローラー
-    Route::get('crawler', 'CrawlerController@index')->name('crawler.index');
-    Route::post('crawler', 'CrawlerController@artistStore')->name('crawler.artist.store');
-    Route::post('image/upload', 'CrawlerController@imageUpload')->name('image.upload');
+//    Route::get('crawler', 'CrawlerController@index')->name('crawler.index');
+//    Route::post('crawler', 'CrawlerController@artistStore')->name('crawler.artist.store');
+//    Route::post('image/upload', 'CrawlerController@imageUpload')->name('image.upload');
 
     // アーティスト
     Route::get('artist', 'ArtistController@index')->name('artist.index');
+    Route::get('artist/create', 'ArtistController@create')->name('artist.create');
+    Route::post('artist/store', 'ArtistController@store')->name('artist.store');
     Route::get('artist/{artist}', 'ArtistController@edit')->name('artist.edit');
     Route::post('artist/{artist}', 'ArtistController@update')->name('artist.update');
 
     // タグ
     Route::get('tag', 'TagController@index')->name('tag.index');
     Route::get('tag/create', 'TagController@create')->name('tag.create');
-    Route::post('tag/create', 'TagController@store')->name('tag.store');
+    Route::post('tag/store', 'TagController@store')->name('tag.store');
     Route::get('tag/{tag}', 'TagController@edit')->name('tag.edit');
     Route::post('tag/{tag}', 'TagController@update')->name('tag.update');
 });

@@ -11,19 +11,17 @@
                 <div class="box-body">
                     <img class="logo" src="{{ $artist->img_url }}" alt="logo" width="300px" height="300px">
                     <h2>{{ $artist->name }}</h2>
-                    <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
-                    <p>登録者数　<span>{{ $artist->users()->count() }}</span></p>
-                </div>
-            </div>
-            <div class="box-footer">
-                @if (Auth::user())
-                    <input id="artistId" type="hidden" name="register" value="{{ Auth::user()->id ?? ''}}">
-                    @if ($artist->artist_register == '[]')
-                        <a href="javascript:void(0)" id="artistRegister"><i class="far fa-heart"></i>@lang('c.register')</a>
-                    @else
-                        <a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>
+                    @if (Auth::user())
+                        <input id="artistId" type="hidden" name="register" value="{{ Auth::user()->id ?? ''}}">
+                        @if ($artist->artist_register == '[]')
+                            <a href="javascript:void(0)" id="artistRegister"><i class="far fa-heart"></i>@lang('c.register')</a>
+                        @else
+                            <a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>
+                        @endif
                     @endif
-                @endif
+                    <p>登録者数　<span>{{ $artist->users()->count() }}</span></p>
+                    <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
+                </div>
             </div>
         </div>
     </div>

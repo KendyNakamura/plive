@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <form id="artist_save_form" action="{{ route('admin::crawler.artist.store') }}" method="post" enctype="multipart/form-data">
+    <form id="artist_save_form" action="{{ route('admin::artist.store') }}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="box box-solid">
             <div class="box-body">
@@ -68,7 +68,6 @@
             <button class="btn btn-warning" name="action" value="preview" onclick="this.form.target='_blank'">@lang('c.preview')</button>
         </div>
     </form>
-    </div>
     <script>
         $(function () {
             $('.button-checkbox').each(function () {
