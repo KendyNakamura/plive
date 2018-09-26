@@ -30,28 +30,35 @@
 <body>
 <div id="app">
     @yield('header')
-    <div class="container">
-        <main class="py-4">
-            @if (session('result'))
-                <div class="alert alert-success" role="alert">
-                    @if(is_array(session('result')))
-                        @foreach (session('result') as $result_item)
-                            {{ $result_item }}{!! $loop->last ? '' : '<br>' !!}
-                        @endforeach
-                    @else
-                        {{ session('result') }}
+    <div class="row">
+        <div class="d-inline-block col-sm-2 text-center">
+            @yield('sidebar')
+        </div>
+        <div class="d-inline-block col-sm-8">
+            <div class="container">
+                <main class="py-4">
+                    @if (session('result'))
+                        <div class="alert alert-success" role="alert">
+                            @if(is_array(session('result')))
+                                @foreach (session('result') as $result_item)
+                                    {{ $result_item }}{!! $loop->last ? '' : '<br>' !!}
+                                @endforeach
+                            @else
+                                {{ session('result') }}
+                            @endif
+                        </div>
                     @endif
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        {{ $error }}
-                    @endforeach
-                </div>
-            @endif
-            @yield('content')
-        </main>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+                    @yield('content')
+                </main>
+            </div>
+        </div>
     </div>
 </div>
 </body>

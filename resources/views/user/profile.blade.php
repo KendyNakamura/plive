@@ -15,4 +15,4 @@
     </div>
 @endsection
 
-@include('layouts.footer')
+@include('layouts.sidebar')
