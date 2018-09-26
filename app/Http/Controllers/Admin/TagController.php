@@ -59,9 +59,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('admin.tag.edit', ['tag' => $tag]);
     }
 
     /**
@@ -71,9 +71,10 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->fill($request->all())->save();
+        return redirect(route('admin::tag.update', $tag))->with('result', __('c.saved'));
     }
 
     /**

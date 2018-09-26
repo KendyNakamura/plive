@@ -26,11 +26,6 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     // トップ
     Route::get('/', 'HomeController@index')->name('index');
 
-    // クローラー
-//    Route::get('crawler', 'CrawlerController@index')->name('crawler.index');
-//    Route::post('crawler', 'CrawlerController@artistStore')->name('crawler.artist.store');
-//    Route::post('image/upload', 'CrawlerController@imageUpload')->name('image.upload');
-
     // アーティスト
     Route::get('artist', 'ArtistController@index')->name('artist.index');
     Route::get('artist/create', 'ArtistController@create')->name('artist.create');

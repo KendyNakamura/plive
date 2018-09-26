@@ -11,7 +11,7 @@
             <tr>
                 <td>{{ $tag->title }}</td>
                 <td>{{ $tag->text }}</td>
-{{--                <td><input type="button" onclick="location.href='{{ route('admin::tag.edit', $tag) }}'" value="編集"></td>--}}
+                <td><input type="button" onclick="location.href='{{ route('admin::tag.edit', $tag) }}'" value="編集"></td>
             </tr>
         @endforeach
     </table>
