@@ -4,7 +4,9 @@
 
 @section('content')
     {{ Breadcrumbs::render('artist', $artist) }}
-
+    @foreach($artist->tags as $tag)
+        <a href="#">{{ $tag->title }}</a>
+    @endforeach
     <div class="row">
         <div class="col-12 text-center">
             <div class="box box-solid">
@@ -30,6 +32,19 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h2>ライブ一覧</h2>
+                    @foreach($days as $k => $v)
+                        {{ $k }}
+                        <table  border="1">
+                            <tr>
+                                <th>日付</th>
+                            </tr>
+                        @foreach($v as $j => $day)
+                            <tr>
+                                    <td>{{ $day }}</td>
+                            </tr>
+                        @endforeach
+                        </table>
+                    @endforeach
                     <table class="row" border="1">
                         <tr>
                             <th>日付</th>
