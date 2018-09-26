@@ -33,6 +33,9 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     Route::get('artist/{artist}', 'ArtistController@edit')->name('artist.edit');
     Route::post('artist/{artist}', 'ArtistController@update')->name('artist.update');
 
+    // ライブ
+    Route::post('live/{live}', 'ArtistController@liveUpdate')->name('live.update');
+
     // タグ
     Route::get('tag', 'TagController@index')->name('tag.index');
     Route::get('tag/create', 'TagController@create')->name('tag.create');
