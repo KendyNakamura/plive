@@ -1,6 +1,8 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
+
     <form id="artist_save_form" action="{{ route('admin::artist.update', $artist)}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="box box-solid">
@@ -42,10 +44,11 @@
                                 <span class="help-block">{{ $errors->first('date_selector') }}</span>
                             @endif
                         </div>
-                        <img src="{{ asset('storage/images/' . $artist->name . '/main.jpg') ?? asset('storage/images/no.jpg') }}" width="250px" height="250px"><br />
-                        <input type="file" name='main'><br/>
                     </div>
                     <div class="col-sm-6">
+                        <img src="{{ asset('storage/images/' . $artist->name . '/main.jpg') ?? asset('storage/images/no.jpg') }}" width="250px" height="250px"><br />
+                        <input type="file" name='main'><br/>
+                        <label>タグ</label>
                         <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
                             @php
                                 $artist_tag_ids = isset($artist) ? $artist->tags()->pluck('tags.id')->toArray() : [];
@@ -63,12 +66,49 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="box-footer">
-            <button class="btn btn-primary" name="action" value="save" onclick="this.form.target='_top'">@lang('c.save')</button>
-            <button class="btn btn-warning" name="action" value="preview" onclick="this.form.target='_blank'">@lang('c.preview')</button>
+            <div class="box-footer">
+                <button class="btn btn-primary" name="action" value="save" onclick="this.form.target='_top'">@lang('c.save')</button>
+                <button class="btn btn-warning" name="action" value="preview" onclick="this.form.target='_blank'">@lang('c.preview')</button>
+            </div>
         </div>
     </form>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-solid">
+                <div class="box-header">
+                    <label>ライブ一覧</label>
+                </div>
+                <div class="box-body">
+                    <table>
+                        <tr>
+                            <th>
+                                日付
+                            </th>
+                            <th style="width:600px;">
+                                タイトル
+                            </th>
+                        </tr>
+                        @foreach($artist->lives->sortBy('date') as $live)
+                            <form action="{{ route('admin::live.update', $live) }}" method="post">
+                                {{ csrf_field() }}
+                                <tr>
+                                    <td>
+                                        <input name="date" type="text" class="form-control" value="{{ old('date', $live->date) }}">
+                                    </td>
+                                    <td>
+                                        <input name="title" type="text" class="form-control" value="{{ old('title', $live->title) }}">
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" type="submit">@lang('c.save')</button>
+                                    </td>
+                                </tr>
+                            </form>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         $(function () {
             $('.button-checkbox').each(function () {

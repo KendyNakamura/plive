@@ -96,4 +96,11 @@ class ArtistController extends Controller
         $artist->tags()->sync($request->tags);
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.updated'));
     }
+
+    public function liveUpdate(Request $request, Live $live)
+    {
+        $live->fill($request->all())->save();
+//        $live->delete();
+        return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.save'));
+    }
 }

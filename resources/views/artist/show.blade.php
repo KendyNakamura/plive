@@ -4,7 +4,9 @@
 
 @section('content')
     {{ Breadcrumbs::render('artist', $artist) }}
-
+    @foreach($artist->tags as $tag)
+        <a href="#">{{ $tag->title }}</a>
+    @endforeach
     <div class="row">
         <div class="col-12 text-center">
             <div class="box box-solid">
@@ -30,18 +32,50 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h2>ライブ一覧</h2>
-                    <table class="row" border="1">
-                        <tr>
-                            <th>日付</th>
-                            <th class="col-6">ライブ</th>
-                        </tr>
-                        @foreach($artist->lives as $live)
-                            <tr>
-                                <td>{{ $live->date }}</td>
-                                <td>{{ $live->title }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
+                    @foreach($artist->lives->sortByDesc('date') as $live)
+                        <li>
+                        {{ $live->date }}
+                        {{ $live->title }}
+                        </li>
+                    @endforeach
+                {{--@php $monthno = 0; @endphp--}}
+                {{--<!-- タブボタン部分 -->--}}
+                    {{--<ul class="nav nav-tabs">--}}
+                        {{--@foreach($days as $k => $v)--}}
+                            {{--@switch ($monthno++)--}}
+                                {{--@case(0)--}}
+                                {{--<li class="nav-item">--}}
+                                    {{--<a href="#tab{{ $monthno }}" class="nav-link active" data-toggle="tab">{{ $k }}</a>--}}
+                                {{--</li>--}}
+                                {{--@continue;--}}
+                                {{--@default--}}
+                                {{--<li class="nav-item">--}}
+                                    {{--<a href="#tab{{ $monthno }}" class="nav-link" data-toggle="tab">{{ $k }}</a>--}}
+                                {{--</li>--}}
+                            {{--@endswitch--}}
+                        {{--@endforeach--}}
+                    {{--</ul>--}}
+                    {{--@php $dayno = 0; @endphp--}}
+                    {{--<!--タブのコンテンツ部分-->--}}
+                    {{--<div class="tab-content">--}}
+                        {{--@foreach($days as $k => $v)--}}
+                            {{--@switch ($dayno++)--}}
+                                {{--@case(0)--}}
+                                {{--<div id="tab{{ $dayno }}" class="tab-pane active">--}}
+                                    {{--@foreach($v as $j => $day)--}}
+                                        {{--<li>{{ $day }}</li>--}}
+                                    {{--@endforeach--}}
+                                {{--</div>--}}
+                                {{--@continue;--}}
+                                {{--@default--}}
+                                {{--<div id="tab{{ $dayno }}" class="tab-pane">--}}
+                                    {{--@foreach($v as $j => $day)--}}
+                                        {{--<li>{{ $day }}</li>--}}
+                                    {{--@endforeach--}}
+                                {{--</div>--}}
+                            {{--@endswitch--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
                 </div>
             </div>
         </div>
