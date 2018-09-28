@@ -17,6 +17,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+    {{--select2--}}
+    <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/adminlte/dist/css/skins/skin-blue.min.css">
@@ -449,6 +451,8 @@ desired effect
 <script src="/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/dist/js/adminlte.min.js"></script>
+
+<script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

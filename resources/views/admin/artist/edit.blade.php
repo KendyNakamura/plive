@@ -103,7 +103,7 @@
                                         <input name="title[{{ $live->id }}]" type="text" class="form-control" value="{{ old("title.{$live->id}", $live->title) }}">
                                     </td>
                                     <td>
-                                        <select name="place_id[{{ $live->id }}]" class="form-control">
+                                        <select name="place_id[{{ $live->id }}]" class="form-control select2">
                                             <option value="" selected>未選択</option>
                                             @foreach($places as $place)
                                                 <option value="{{ $place->id }}"{{ old("place_id.{$live->id}", $live->place_id ?? '') == $place->id ? ' selected' : ''}}>{{ $place->name }}</option>
@@ -124,60 +124,66 @@
             </div>
         </div>
     </div>
-        <script>
-            $(function () {
-                $('.button-checkbox').each(function () {
 
-                    var $widget = $(this),
-                        $button = $widget.find('button'),
-                        $checkbox = $widget.find('input:checkbox'),
-                        color = $button.data('color'),
-                        settings = {
-                            on: {
-                                icon: 'glyphicon glyphicon-check'
-                            },
-                            off: {
-                                icon: 'glyphicon glyphicon-unchecked'
-                            }
-                        };
+    <script>
+        $(document).ready( function () {
+            $('.select2').select2();
+        });
+    </script>
+    <script>
+        $(function () {
+            $('.button-checkbox').each(function () {
 
-                    $button.on('click', function () {
-                        $checkbox.prop('checked', !$checkbox.is(':checked'));
-                        $checkbox.triggerHandler('change');
-                        updateDisplay();
-                    });
-
-                    $checkbox.on('change', function () {
-                        updateDisplay();
-                    });
-
-                    function updateDisplay() {
-                        var isChecked = $checkbox.is(':checked');
-                        $button.data('state', (isChecked) ? "on" : "off");
-                        $button.find('.state-icon')
-                            .removeClass()
-                            .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-                        if (isChecked) {
-                            $button
-                                .removeClass('btn-default')
-                                .addClass('btn-' + color + ' active');
-                        } else {
-                            $button
-                                .removeClass('btn-' + color + ' active')
-                                .addClass('btn-default');
+                var $widget = $(this),
+                    $button = $widget.find('button'),
+                    $checkbox = $widget.find('input:checkbox'),
+                    color = $button.data('color'),
+                    settings = {
+                        on: {
+                            icon: 'glyphicon glyphicon-check'
+                        },
+                        off: {
+                            icon: 'glyphicon glyphicon-unchecked'
                         }
-                    }
+                    };
 
-                    function init() {
-                        updateDisplay();
-                        if ($button.find('.state-icon').length == 0) {
-                            $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-                        }
-                    }
-
-                    init();
+                $button.on('click', function () {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                    $checkbox.triggerHandler('change');
+                    updateDisplay();
                 });
+
+                $checkbox.on('change', function () {
+                    updateDisplay();
+                });
+
+                function updateDisplay() {
+                    var isChecked = $checkbox.is(':checked');
+                    $button.data('state', (isChecked) ? "on" : "off");
+                    $button.find('.state-icon')
+                        .removeClass()
+                        .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                    if (isChecked) {
+                        $button
+                            .removeClass('btn-default')
+                            .addClass('btn-' + color + ' active');
+                    } else {
+                        $button
+                            .removeClass('btn-' + color + ' active')
+                            .addClass('btn-default');
+                    }
+                }
+
+                function init() {
+                    updateDisplay();
+                    if ($button.find('.state-icon').length == 0) {
+                        $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                    }
+                }
+
+                init();
             });
-        </script>
+        });
+    </script>
 @endsection
