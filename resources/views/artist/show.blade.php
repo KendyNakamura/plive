@@ -32,7 +32,7 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h2>ライブ一覧</h2>
-                    @foreach($artist->lives->sortByDesc('date') as $live)
+                    @foreach($artist->lives->where('is_active', 1)->sortByDesc('date') as $live)
                         <li>
                         {{ $live->date }}
                         {{ $live->title }}

@@ -24,14 +24,14 @@ class ArtistController extends Controller
 
     public function show(Artist $artist)
     {
-        for($i = 0; $i <= 2; $i++){
-            $monthes[] = Carbon::now()->addMonth($i)->format('Y/m');
-            $end_days = Carbon::now()->addMonthNoOverflow($i)->endOfMonth()->format('d');
-            for($j = 0;$j <= $end_days-1; $j++) {
-                $days[$monthes[$i]][$j] = Carbon::now()->addMonthNoOverflow($i)->startOfMonth()->addDay($j)->format('d');
-            }
-        }
-        return view('artist.show', ['artist' => $artist, 'monthes' => $monthes, 'days' => $days]);
+//        for($i = 0; $i <= 2; $i++){
+//            $monthes[] = Carbon::now()->addMonth($i)->format('Y/m');
+//            $end_days = Carbon::now()->addMonthNoOverflow($i)->endOfMonth()->format('d');
+//            for($j = 0;$j <= $end_days-1; $j++) {
+//                $days[$monthes[$i]][$j] = Carbon::now()->addMonthNoOverflow($i)->startOfMonth()->addDay($j)->format('d');
+//            }
+//        }
+        return view('artist.show', ['artist' => $artist]);
     }
 
     public function register(Request $request, Artist $artist)

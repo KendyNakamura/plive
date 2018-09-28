@@ -1,8 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
-
     <form id="artist_save_form" action="{{ route('admin::artist.update', $artist)}}" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="box box-solid">
@@ -125,6 +123,7 @@
                 </form>
             </div>
         </div>
+    </div>
         <script>
             $(function () {
                 $('.button-checkbox').each(function () {
@@ -169,7 +168,6 @@
                                 .addClass('btn-default');
                         }
                     }
-
 
                     function init() {
                         updateDisplay();
