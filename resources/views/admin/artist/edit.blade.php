@@ -87,6 +87,9 @@
                             <th style="width:600px;">
                                 タイトル
                             </th>
+                            <th>
+                                場所
+                            </th>
                         </tr>
                         @foreach($artist->lives->sortBy('date') as $live)
                             <form action="{{ route('admin::live.update', $live) }}" method="post">
@@ -97,6 +100,14 @@
                                     </td>
                                     <td>
                                         <input name="title" type="text" class="form-control" value="{{ old('title', $live->title) }}">
+                                    </td>
+                                    <td>
+                                        <select name="place_id" class="form-control">
+                                            <option value="" selected>未選択</option>
+                                            @foreach($places as $place)
+                                                <option value="{{ $place->id }}"{{ old('place_id', $live->place_id ?? '') == $place->id ? ' selected' : ''}}>{{ $place->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td>
                                         <button class="btn btn-primary" type="submit">@lang('c.save')</button>

@@ -298,6 +298,19 @@ desired effect
                     <li><a href="{{ route('admin::tag.index') }}">編集</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i>
+                    <span>会場</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('admin::place.create') }}">新規作成</a></li>
+                    <li><a href="{{ route('admin::place.index') }}">編集</a></li>
+                </ul>
+            </li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

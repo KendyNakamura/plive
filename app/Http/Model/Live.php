@@ -11,11 +11,17 @@ class Live extends Model
         'title',
         'date',
         'artist_id',
+        'place_id',
     ];
 
     public function artist()
     {
     	return $this->belongsTo('App\Http\Model\Artist');
+    }
+
+    public function place()
+    {
+        return $this->belongsTo('App\Http\Model\Place');
     }
 
     public static function crawlerSave($request, $artist)

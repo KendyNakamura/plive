@@ -8,6 +8,7 @@ use App\Http\Requests\ArtistIndexRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
+use App\Http\Model\Place;
 use App\Http\Model\Tag;
 use Goutte\Client;
 
@@ -66,7 +67,7 @@ class ArtistController extends Controller
 
     public function edit(Artist $artist)
     {
-        return view('admin.artist.edit', ['artist' => $artist, 'tags' => Tag::all()]);
+        return view('admin.artist.edit', ['artist' => $artist, 'tags' => Tag::all(), 'places' => Place::all()]);
     }
 
     public function update(ArtistRequest $request, Artist $artist)
@@ -100,7 +101,7 @@ class ArtistController extends Controller
     public function liveUpdate(Request $request, Live $live)
     {
         $live->fill($request->all())->save();
-//        $live->delete();
+
         return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.save'));
     }
 }
