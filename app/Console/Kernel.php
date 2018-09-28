@@ -42,14 +42,15 @@ class Kernel extends ConsoleKernel
                         preg_match("/\d+\.\d+\.\d+/", $date2,$date3 );
                         $live->date = $date3[0] ?? "";
                         $live->artist_id = $artist->id;
-                        if (empty($artist->lives->where('title', $live->title)->first()) && $li) {
+                        $live->is_active = 0;
+                        if (empty($artist->lives->where('date', $live->date)->first()) && empty($artist->lives->where('title', $live->title)->first())) {
                             $live->save();
                         }
                     }
                 });
             }
-        })
-//        })->dailyAt('3:00')
+//        })
+        })->dailyAt('3:00')
             ->after(function () {
                 echo 'finish';
             });
