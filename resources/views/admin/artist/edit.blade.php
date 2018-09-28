@@ -75,106 +75,111 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="box box-solid">
-                <div class="box-header">
-                    <label>ライブ一覧</label>
-                </div>
-                <div class="box-body">
-                    <table>
-                        <tr>
-                            <th>
-                                日付
-                            </th>
-                            <th style="width:600px;">
-                                タイトル
-                            </th>
-                            <th>
-                                場所
-                            </th>
-                        </tr>
-                        @foreach($artist->lives->sortBy('date') as $live)
-                            <form action="{{ route('admin::live.update', $live) }}" method="post">
-                                {{ csrf_field() }}
+                <form action="{{ route('admin::lives.update', $artist) }}" method="post">
+                    <div class="box-header">
+                        <label>ライブ一覧</label>
+                    </div>
+                    <div class="box-body">
+                        {{ csrf_field() }}
+                        <table>
+                            <tr>
+                                <th>
+                                    日付
+                                </th>
+                                <th style="width:500px;">
+                                    タイトル
+                                </th>
+                                <th>
+                                    場所
+                                </th>
+                                <th>
+                                    公開状態
+                                </th>
+                            </tr>
+                            @foreach($artist->lives->sortByDesc('date') as $live)
                                 <tr>
                                     <td>
-                                        <input name="date" type="text" class="form-control" value="{{ old('date', $live->date) }}">
+                                        <input name="date[{{ $live->id }}]" type="text" class="form-control" value="{{ old("date.{$live->id}", $live->date) }}">
                                     </td>
                                     <td>
-                                        <input name="title" type="text" class="form-control" value="{{ old('title', $live->title) }}">
+                                        <input name="title[{{ $live->id }}]" type="text" class="form-control" value="{{ old("title.{$live->id}", $live->title) }}">
                                     </td>
                                     <td>
-                                        <select name="place_id" class="form-control">
+                                        <select name="place_id[{{ $live->id }}]" class="form-control">
                                             <option value="" selected>未選択</option>
                                             @foreach($places as $place)
-                                                <option value="{{ $place->id }}"{{ old('place_id', $live->place_id ?? '') == $place->id ? ' selected' : ''}}>{{ $place->name }}</option>
+                                                <option value="{{ $place->id }}"{{ old("place_id.{$live->id}", $live->place_id ?? '') == $place->id ? ' selected' : ''}}>{{ $place->name }}</option>
                                             @endforeach
                                         </select>
                                     </td>
                                     <td>
-                                        <button class="btn btn-primary" type="submit">@lang('c.save')</button>
+                                        <input name="is_active[{{ $live->id }}]" id="live_active-{{ $live->id }}" type="checkbox" value="1" {{ old("is_active.{$live->id}", $live->is_active ?? '') == '1' ? 'checked' : ''  }}><label for="live_active-{{ $live->id }}">公開</label>
                                     </td>
                                 </tr>
-                            </form>
-                        @endforeach
-                    </table>
-                </div>
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <button class="btn btn-primary" type="submit">@lang('c.save')</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-    <script>
-        $(function () {
-            $('.button-checkbox').each(function () {
+        <script>
+            $(function () {
+                $('.button-checkbox').each(function () {
 
-                var $widget = $(this),
-                    $button = $widget.find('button'),
-                    $checkbox = $widget.find('input:checkbox'),
-                    color = $button.data('color'),
-                    settings = {
-                        on: {
-                            icon: 'glyphicon glyphicon-check'
-                        },
-                        off: {
-                            icon: 'glyphicon glyphicon-unchecked'
+                    var $widget = $(this),
+                        $button = $widget.find('button'),
+                        $checkbox = $widget.find('input:checkbox'),
+                        color = $button.data('color'),
+                        settings = {
+                            on: {
+                                icon: 'glyphicon glyphicon-check'
+                            },
+                            off: {
+                                icon: 'glyphicon glyphicon-unchecked'
+                            }
+                        };
+
+                    $button.on('click', function () {
+                        $checkbox.prop('checked', !$checkbox.is(':checked'));
+                        $checkbox.triggerHandler('change');
+                        updateDisplay();
+                    });
+
+                    $checkbox.on('change', function () {
+                        updateDisplay();
+                    });
+
+                    function updateDisplay() {
+                        var isChecked = $checkbox.is(':checked');
+                        $button.data('state', (isChecked) ? "on" : "off");
+                        $button.find('.state-icon')
+                            .removeClass()
+                            .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+                        if (isChecked) {
+                            $button
+                                .removeClass('btn-default')
+                                .addClass('btn-' + color + ' active');
+                        } else {
+                            $button
+                                .removeClass('btn-' + color + ' active')
+                                .addClass('btn-default');
                         }
-                    };
-
-                $button.on('click', function () {
-                    $checkbox.prop('checked', !$checkbox.is(':checked'));
-                    $checkbox.triggerHandler('change');
-                    updateDisplay();
-                });
-
-                $checkbox.on('change', function () {
-                    updateDisplay();
-                });
-
-                function updateDisplay() {
-                    var isChecked = $checkbox.is(':checked');
-                    $button.data('state', (isChecked) ? "on" : "off");
-                    $button.find('.state-icon')
-                        .removeClass()
-                        .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-                    if (isChecked) {
-                        $button
-                            .removeClass('btn-default')
-                            .addClass('btn-' + color + ' active');
-                    } else {
-                        $button
-                            .removeClass('btn-' + color + ' active')
-                            .addClass('btn-default');
                     }
-                }
 
 
-                function init() {
-                    updateDisplay();
-                    if ($button.find('.state-icon').length == 0) {
-                        $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                    function init() {
+                        updateDisplay();
+                        if ($button.find('.state-icon').length == 0) {
+                            $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                        }
                     }
-                }
 
-                init();
+                    init();
+                });
             });
-        });
-    </script>
+        </script>
 @endsection

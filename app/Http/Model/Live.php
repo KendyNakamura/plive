@@ -12,6 +12,7 @@ class Live extends Model
         'date',
         'artist_id',
         'place_id',
+        'is_active',
     ];
 
     public function artist()

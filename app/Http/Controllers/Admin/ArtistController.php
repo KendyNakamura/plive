@@ -104,4 +104,18 @@ class ArtistController extends Controller
 
         return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.save'));
     }
+
+    public function livesUpdate(Request $request, Artist $artist)
+    {
+        $lives = Live::all()->where('artist_id', $artist->id);
+        foreach($lives as $live)
+        {
+            $live->date = $request->date[$live->id];
+            $live->title = $request->title[$live->id];
+            $live->place_id = $request->place_id[$live->id];
+            $live->is_active = $request->is_active[$live->id] ?? 0;
+            $live->save();
+        }
+        return redirect(route('admin::artist.edit', $artist))->with('result', __('c.saved'));
+    }
 }
