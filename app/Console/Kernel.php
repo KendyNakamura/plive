@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Carbon\Carbon;
 use Goutte\Client;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
@@ -49,11 +50,19 @@ class Kernel extends ConsoleKernel
                     }
                 });
             }
-        })
-//        })->dailyAt('3:00')
-            ->after(function () {
-                echo 'finish';
-            });
+
+            $today = preg_replace('/\./', '', Carbon::today()->format('Y.m.d'));
+            foreach(Live::all() as $live)
+            {
+                $date = $live->date ? preg_replace('/\./', '', $live->date) : 0;
+                if($date - $today < 0)
+                {
+                    $live->is_active = 0;
+                    $live->save();
+                }
+            }
+//        });
+        })->dailyAt('3:00');
     }
 
     /**
