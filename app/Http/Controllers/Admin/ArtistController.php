@@ -93,8 +93,9 @@ class ArtistController extends Controller
             $request->file('main')->storeAs('public/images/'. $request->name, 'main.jpg');
         }
 
-        $artist->fill($request->all())->save();
         $artist->tags()->sync($request->tags);
+        $artist->fill($request->all())->save();
+
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.updated'));
     }
 

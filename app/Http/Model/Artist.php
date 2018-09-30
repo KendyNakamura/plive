@@ -33,12 +33,18 @@ class Artist extends Model
     }
 
     // 検索条件
-    public static function search(Request $request)
+    public static function search($request)
     {
         $query = Artist::query();
 
         if ($request->artist_search) {
             $query->where('name', 'like', "%{$request->artist_search}%");
+        }
+
+        if($request->tag) {
+            $artists = $query->whereHas('tags', function ($query, $request) {
+                $query->where('tag_id', $request->tag);
+            })->get();
         }
 
         return $query->paginate(30);

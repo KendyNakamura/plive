@@ -18,8 +18,9 @@ class ArtistController extends Controller
 
     public function index(ArtistIndexRequest $request)
     {
+        $index = 0;
     	$artists = Artist::search($request);
-    	return view('artist.index', ['artists' => $artists, 'tags' => Tag::all()]);
+    	return view('artist.index', ['artists' => $artists, 'tags' => Tag::all(), 'index' => $index]);
     }
 
     public function show(Artist $artist)
