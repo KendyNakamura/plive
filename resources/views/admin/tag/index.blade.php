@@ -8,6 +8,7 @@
             <th></th>
         </tr>
         @foreach ($tags as $tag)
+            <tbody>
             <tr>
                 <td>{{ $tag->title }}</td>
                 <td>{{ $tag->text }}</td>
@@ -49,15 +50,15 @@
     </div>
 @endsection
 @section('page_assets_end_body_tag')
-<script>
-    // 削除 モーダル
-    $('#modal_delete').on('shown.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var title = button.data('title');
-        var url = button.data('tag_url');
-        var modal = $(this);
-        modal.find('.modal-body p').eq(0).text(title);
-        modal.find('form').attr('action',url);
-    });
-</script>
+    <script>
+        // 削除 モーダル
+        $('#modal_delete').on('shown.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var title = button.data('title');
+            var url = button.data('tag_url');
+            var modal = $(this);
+            modal.find('.modal-body p').eq(0).text(title);
+            modal.find('form').attr('action',url);
+        });
+    </script>
 @endsection
