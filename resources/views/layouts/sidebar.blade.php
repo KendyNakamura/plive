@@ -3,7 +3,7 @@
         @foreach ($tags as $tag)
             <form name="tags" method="get" action="{{ route('artist.index') }}">
                 <li style="list-style: none;">
-                    <input type="hidden" name="tag" value="{{ $tag->id }}">
+                    <input type="hidden" name="tag" value="{{ $tag->title }}">
                     <a href="javascript:tags[{{ $index }}].submit()">{{ $tag->title }}</a>
                 </li>
             </form>

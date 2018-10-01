@@ -42,9 +42,9 @@ class Artist extends Model
         }
 
         if($request->tag) {
-            $artists = $query->whereHas('tags', function ($query, $request) {
-                $query->where('tag_id', $request->tag);
-            })->get();
+            $query->whereHas('tags', function ($query) use ($request) {
+                $query->where('title', $request->tag);
+            });
         }
 
         return $query->paginate(30);
