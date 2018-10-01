@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Place;
+use App\Http\Requests\PlaceRequest;
 
 class PlaceController extends Controller
 {
@@ -26,7 +27,7 @@ class PlaceController extends Controller
         return view('admin.place.create');
     }
 
-    public function store(Request $request)
+    public function store(PlaceRequest $request)
     {
         $place = Place::create($request->all());
         return redirect(route('admin::place.index'))->with('result', __('c.saved'));
@@ -42,7 +43,7 @@ class PlaceController extends Controller
         return view('admin.place.edit', ['place' => $place]);
     }
 
-    public function update(Request $request, Place $place)
+    public function update(PlaceRequest $request, Place $place)
     {
         $place->fill($request->all())->save();
         return redirect(route('admin::place.update', $place))->with('result', __('c.saved'));

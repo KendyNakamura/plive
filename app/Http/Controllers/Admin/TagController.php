@@ -37,7 +37,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
         $tag = Tag::create($request->all());
         return redirect(route('admin::tag.index'))->with('result', __('c.saved'));
