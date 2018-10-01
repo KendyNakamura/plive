@@ -15,6 +15,10 @@ class Live extends Model
         'is_active',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean'
+    ];
+
     public function artist()
     {
     	return $this->belongsTo('App\Http\Model\Artist');

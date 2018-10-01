@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Tag;
+use App\Http\Requests\TagRequest;
 
 class TagController extends Controller
 {
@@ -71,7 +72,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
         $tag->fill($request->all())->save();
         return redirect(route('admin::tag.update', $tag))->with('result', __('c.saved'));

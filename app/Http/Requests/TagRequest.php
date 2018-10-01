@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArtistIndexRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +24,17 @@ class ArtistIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            'artist_search' => 'max:32',
-            'tag' => 'max:32'
+            'title' => 'max:32|unique:tags|required',
+            'text' => 'nullable|max:100',
         ];
     }
 
     public function messages()
     {
         return[
-          'artist_search.max' => __('e.max'),
-          'tag.max' => __('e.max'),
+            '*.max' => __('e.max'),
+            'title.unique' => __('e.unique'),
+            'title.required' => __('e.required'),
         ];
     }
 }

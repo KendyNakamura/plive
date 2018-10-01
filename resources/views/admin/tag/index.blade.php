@@ -3,8 +3,8 @@
 @section('content')
     <table border="1">
         <tr>
-            <th>name</th>
-            <th>url</th>
+            <th>title</th>
+            <th>text</th>
             <th></th>
         </tr>
         @foreach ($tags as $tag)
