@@ -457,5 +457,6 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+@yield('page_assets_end_body_tag')
 </body>
 </html>

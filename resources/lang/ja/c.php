@@ -9,6 +9,9 @@ return [
     'preview' => 'プレビュー',
     'search' => '検索',
     'error' => 'エラー',
+    'delete' => '削除',
+    'delete?' => '削除しますか？',
+    'edit' => '編集',
 
     // 登録
     'register' => '登録する',

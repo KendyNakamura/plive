@@ -84,8 +84,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect(route('admin::tag.index'))->with('result', __('c.saved'));
     }
 }

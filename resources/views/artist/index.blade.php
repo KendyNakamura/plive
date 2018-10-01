@@ -6,17 +6,32 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render('Home') }}
-            <div class="row">
-                @foreach($artists as $artist)
-                    <div class="col-md-3 block text-center">
-                        <a href="{{ route('artist.show', $artist) }}">
-                            <img class="logo" src="{{ $artist->img_url }}" alt="logo" width="150px" height="150px">
-                            <p>{{ $artist->name }}</p>
-                        </a>
-                        <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
-                    </div>
-                @endforeach
-            </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            name
+                        </th>
+                        <th>
+                            ホームページ
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($artists as $artist)
+                        <tr>
+                            <td>
+                                <a href="{{ route('artist.show', $artist) }}">
+                                    {{ $artist->name }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             <div class="mt-3">
                 {{ $artists->links() }}
             </div>

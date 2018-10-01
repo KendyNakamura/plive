@@ -31,7 +31,8 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     Route::get('artist/create', 'ArtistController@create')->name('artist.create');
     Route::post('artist/store', 'ArtistController@store')->name('artist.store');
     Route::get('artist/{artist}', 'ArtistController@edit')->name('artist.edit');
-    Route::post('artist/{artist}', 'ArtistController@update')->name('artist.update');
+    Route::post('artist/{artist}/update', 'ArtistController@update')->name('artist.update');
+    Route::post('artist/{artist}/delete', 'ArtistController@delete')->name('artist.delete');
 
     // Live
     Route::post('live/{live}', 'ArtistController@liveUpdate')->name('live.update');
@@ -42,12 +43,14 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     Route::get('place/create', 'PlaceController@create')->name('place.create');
     Route::post('place/store', 'PlaceController@store')->name('place.store');
     Route::get('place/{place}', 'PlaceController@edit')->name('place.edit');
-    Route::post('place/{place}', 'PlaceController@update')->name('place.update');
+    Route::post('place/{place}/update', 'PlaceController@update')->name('place.update');
+    Route::post('place/{place}/delete', 'PlaceController@delete')->name('place.delete');
 
     // Tag
     Route::get('tag', 'TagController@index')->name('tag.index');
     Route::get('tag/create', 'TagController@create')->name('tag.create');
     Route::post('tag/store', 'TagController@store')->name('tag.store');
     Route::get('tag/{tag}', 'TagController@edit')->name('tag.edit');
-    Route::post('tag/{tag}', 'TagController@update')->name('tag.update');
+    Route::post('tag/{tag}/update', 'TagController@update')->name('tag.update');
+    Route::post('tag/{tag}/delete', 'TagController@delete')->name('tag.delete');
 });

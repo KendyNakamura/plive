@@ -62,7 +62,6 @@ class ArtistController extends Controller
         $artist = Artist::create($request->all());
         $artist->tags()->sync($request->tags);
 
-//        Live::crawlerSave($request, $artist);
         return redirect(route('admin::artist.create'))->with('result', __('c.saved'));
     }
 
