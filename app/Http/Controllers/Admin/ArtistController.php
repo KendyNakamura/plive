@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArtistRequest;
 use App\Http\Requests\ArtistIndexRequest;
+use App\Http\Requests\LiveRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Artist;
 use App\Http\Model\Live;
@@ -27,7 +28,7 @@ class ArtistController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
         return view('admin.artist.create', [
             'tags' => Tag::all(),
@@ -99,14 +100,14 @@ class ArtistController extends Controller
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.updated'));
     }
 
-    public function liveUpdate(Request $request, Live $live)
-    {
-        $live->fill($request->all())->save();
+//    public function liveUpdate(LiveRequest $request, Live $live)
+//    {
+//        $live->fill($request->all())->save();
+//
+//        return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.save'));
+//    }
 
-        return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.save'));
-    }
-
-    public function livesUpdate(Request $request, Artist $artist)
+    public function livesUpdate(LiveRequest $request, Artist $artist)
     {
         $lives = Live::all()->where('artist_id', $artist->id);
         foreach($lives as $live)

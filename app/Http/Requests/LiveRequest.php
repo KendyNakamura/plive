@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlaceRequest extends FormRequest
+class LiveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,18 @@ class PlaceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'unique:places|max:50|required',
-            'url' => 'url|max:200|nullable',
-            'prefecture' => 'required|in:' . implode(',', config('prefecture')),
-            'capacity' => 'required|integer|between:10,30000'
+            'title.*' => 'required|max:100',
+            'date.*' => 'nullable|regex:/\d{4}.\d{2}.\d{2}/',
+            'place_id.*' => 'nullable|integer|exists:places,id',
+            'is_active.*' => 'required|boolean',
         ];
     }
 
     public function messages()
     {
         return[
-            '*.max' => __('e.max'),
+            'title.*.max' => __('e.max'),
             '*.required' => __('e.required'),
-            'name.unique' => __('e.unique'),
-            'url.url' => __('e.url'),
-            'capacity.between' => __('e.between'),
             '*' => __('e.error'),
         ];
     }

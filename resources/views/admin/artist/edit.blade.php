@@ -96,22 +96,34 @@
                             </tr>
                             @foreach($artist->lives->sortByDesc('date') as $live)
                                 <tr>
-                                    <td>
+                                    <td class="form-group{{ $errors->has("date.{$live->id}") ? ' has-error' : '' }}">
                                         <input name="date[{{ $live->id }}]" type="text" class="form-control" value="{{ old("date.{$live->id}", $live->date) }}">
+                                        @if ($errors->has("date.{$live->id}"))
+                                            <span class="help-block">{{ $errors->first("date.{$live->id}") }}</span>
+                                        @endif
                                     </td>
-                                    <td>
+                                    <td class="form-group{{ $errors->has("title.{$live->id}") ? ' has-error' : '' }}">
                                         <input name="title[{{ $live->id }}]" type="text" class="form-control" value="{{ old("title.{$live->id}", $live->title) }}">
+                                        @if ($errors->has("title.{$live->id}"))
+                                            <span class="help-block">{{ $errors->first("title.{$live->id}") }}</span>
+                                        @endif
                                     </td>
-                                    <td>
+                                    <td class="form-group{{ $errors->has("place_id.{$live->id}") ? ' has-error' : '' }}">
                                         <select name="place_id[{{ $live->id }}]" class="form-control select2">
                                             <option value="" selected>未選択</option>
                                             @foreach($places as $place)
                                                 <option value="{{ $place->id }}"{{ old("place_id.{$live->id}", $live->place_id ?? '') == $place->id ? ' selected' : ''}}>{{ $place->name }}</option>
                                             @endforeach
                                         </select>
+                                        @if ($errors->has("place_id.{$live->id}"))
+                                            <span class="help-block">{{ $errors->first("place_id.{$live->id}") }}</span>
+                                        @endif
                                     </td>
-                                    <td>
+                                    <td class="form-group{{ $errors->has("is_active.{$live->id}") ? ' has-error' : '' }}">
                                         <input name="is_active[{{ $live->id }}]" id="live_active-{{ $live->id }}" type="checkbox" value="1" {{ old("is_active.{$live->id}", $live->is_active ?? '') == '1' ? 'checked' : ''  }}><label for="live_active-{{ $live->id }}">公開</label>
+                                        @if ($errors->has("is_active.{$live->id}"))
+                                            <span class="help-block">{{ $errors->first("is_active.{$live->id}") }}</span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
