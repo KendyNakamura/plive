@@ -31,51 +31,37 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-body">
-                    <h2>ライブ一覧</h2>
+                    <h2>Live</h2>
                     @foreach($artist->lives->where('is_active', 1)->sortByDesc('date') as $live)
                         <li>
                         {{ $live->date }}
                         {{ $live->title }}
                         </li>
                     @endforeach
-                {{--@php $monthno = 0; @endphp--}}
-                {{--<!-- タブボタン部分 -->--}}
-                    {{--<ul class="nav nav-tabs">--}}
-                        {{--@foreach($days as $k => $v)--}}
-                            {{--@switch ($monthno++)--}}
-                                {{--@case(0)--}}
-                                {{--<li class="nav-item">--}}
-                                    {{--<a href="#tab{{ $monthno }}" class="nav-link active" data-toggle="tab">{{ $k }}</a>--}}
-                                {{--</li>--}}
-                                {{--@continue;--}}
-                                {{--@default--}}
-                                {{--<li class="nav-item">--}}
-                                    {{--<a href="#tab{{ $monthno }}" class="nav-link" data-toggle="tab">{{ $k }}</a>--}}
-                                {{--</li>--}}
-                            {{--@endswitch--}}
-                        {{--@endforeach--}}
-                    {{--</ul>--}}
-                    {{--@php $dayno = 0; @endphp--}}
-                    {{--<!--タブのコンテンツ部分-->--}}
-                    {{--<div class="tab-content">--}}
-                        {{--@foreach($days as $k => $v)--}}
-                            {{--@switch ($dayno++)--}}
-                                {{--@case(0)--}}
-                                {{--<div id="tab{{ $dayno }}" class="tab-pane active">--}}
-                                    {{--@foreach($v as $j => $day)--}}
-                                        {{--<li>{{ $day }}</li>--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
-                                {{--@continue;--}}
-                                {{--@default--}}
-                                {{--<div id="tab{{ $dayno }}" class="tab-pane">--}}
-                                    {{--@foreach($v as $j => $day)--}}
-                                        {{--<li>{{ $day }}</li>--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
-                            {{--@endswitch--}}
-                        {{--@endforeach--}}
-                    {{--</div>--}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <h2>Message</h2>
+                    @foreach($messages as $message)
+                        {{--if this artist--}}
+                        @if($message->to_artist_id == $artist->id)
+                            {{--if message user = me--}}
+                            @if(Auth::user() && $message->user == Auth::user())
+                                <li style="color:red">
+                                    {{ $message->text }}
+                                </li>
+                            @else
+                                <li>
+                                    {{ $message->text }}
+                                </li>
+                            @endif
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
