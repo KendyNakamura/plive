@@ -15,6 +15,9 @@ Route::post('artist/{artist}/register/delete', 'ArtistController@registerDelete'
 // User
 Route::get('profile', 'HomeController@index')->name('index');
 
+// message
+Route::post('message/store/{artist}', 'MessageController@store')->name('message.store');
+
 // Admin route
 Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
 

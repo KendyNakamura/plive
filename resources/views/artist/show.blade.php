@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@section('page_assets_head_tag')
+    <link href="{{ asset('css/chatbox.css') }}" rel="stylesheet">
+@endsection
 @include('layouts.header')
 
 @section('content')
@@ -34,8 +37,8 @@
                     <h2>Live</h2>
                     @foreach($artist->lives->where('is_active', 1)->sortByDesc('date') as $live)
                         <li>
-                        {{ $live->date }}
-                        {{ $live->title }}
+                            {{ $live->date }}
+                            {{ $live->title }}
                         </li>
                     @endforeach
                 </div>
@@ -47,25 +50,39 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <h2>Message</h2>
-                    @foreach($messages as $message)
-                        {{--if this artist--}}
-                        @if($message->to_artist_id == $artist->id)
-                            {{--if message user = me--}}
-                            @if(Auth::user() && $message->user == Auth::user())
-                                <li style="color:red">
-                                    {{ $message->text }}
-                                </li>
-                            @else
-                                <li>
-                                    {{ $message->text }}
-                                </li>
+                    <div class="line-bc" id="target">
+                        @foreach($messages as $message)
+                            {{--if this artist--}}
+                            @if($message->to_artist_id == $artist->id)
+                                {{--if message user = me--}}
+                                @if(Auth::user() && $message->user == Auth::user())
+                                    <div class="mycomment">
+                                        <p>{{ $message->text }}</p>
+                                    </div>
+                                @else
+                                    <div class="balloon6">
+                                        <div class="faceicon">
+                                            {{--image--}}
+                                        </div>
+                                        <div class="chatting">
+                                            <div class="says">
+                                                <p>{{ $message->text }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             @endif
-                        @endif
-                    @endforeach
+                        @endforeach
+                        <div id="message"></div>
+                        <input name="text" type="text" class="form-control" id="messageText">
+                        <button id="messagePost" class="btn btn-success">@lang('c.send')</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('page_assets_end_tag')
     <script>
         $(function(){
             $id = $('#artistId').val();
@@ -107,6 +124,30 @@
                 }).always( (data) => {
                 });
             });
+
+            $(document).on('click', '#messagePost',function() {
+                var text = $('#messageText').val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url:'{{ route('message.store', $artist) }}',
+                    type:'POST',
+                    data:{'text':text}
+                }).done( function(data) {
+                    $('#message').before('<div class="mycomment"><p>' + data + '</p></div>');
+                    console.log(data);
+                    $('#messageText').val('');
+                }).fail( function(data) {
+                    $('.result').html(data);
+                    console.log(data);
+                }).always( (data) => {
+                });
+
+                $('#target').animate({scrollTop: $('#target')[0].scrollHeight}, 'fast');
+            })
         });
     </script>
 @endsection

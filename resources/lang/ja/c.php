@@ -12,6 +12,7 @@ return [
     'delete' => '削除',
     'delete?' => '削除しますか？',
     'edit' => '編集',
+    'send' => '送信',
 
     // 登録
     'register' => '登録する',
