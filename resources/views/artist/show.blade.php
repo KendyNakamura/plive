@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page_assets_head_tag')
-    <link href="{{ asset('css/chatbox.css') }}" rel="stylesheet">
+    <link href="@addtimestamp(css/chatbox.css)" rel="stylesheet">
 @endsection
 @include('layouts.header')
 
@@ -51,32 +51,34 @@
                 <div class="box-body">
                     <h2>Message</h2>
                     <div class="line-bc" id="target">
-                        @foreach($messages as $message)
+                        <div id="message"></div>
+                        @foreach($messages->sortByDesc('created_at') as $message)
                             {{--if this artist--}}
                             @if($message->to_artist_id == $artist->id)
                                 {{--if message user = me--}}
-                                @if(Auth::user() && $message->user == Auth::user())
-                                    <div class="mycomment">
-                                        <p>{{ $message->text }}</p>
-                                    </div>
-                                @else
-                                    <div class="balloon6">
-                                        <div class="faceicon">
-                                            {{--image--}}
-                                        </div>
-                                        <div class="chatting">
-                                            <div class="says">
-                                                <p>{{ $message->text }}</p>
+                                <div class="chat-box">
+                                    @if(Auth::user() && $message->user == Auth::user())
+                                        <div class="chat-area">
+                                            <div class="chat-hukidashi">
+                                                {{ $message->text }}
                                             </div>
                                         </div>
-                                    </div>
-                                @endif
+                                    @else
+                                        <div class="chat-face">
+                                            <img src="{{ asset('storage/images/no.jpg') }}" alt="your-img" width="90" height="90">
+                                        </div>
+                                        <div class="chat-area">
+                                            <div class="chat-hukidashi someone">
+                                                {{ $message->text }}
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
                             @endif
                         @endforeach
-                        <div id="message"></div>
-                        <input name="text" type="text" class="form-control" id="messageText">
-                        <button id="messagePost" class="btn btn-success">@lang('c.send')</button>
                     </div>
+                    <input name="text" type="text" class="form-control" id="messageText">
+                    <button id="messagePost" class="btn btn-success">@lang('c.send')</button>
                 </div>
             </div>
         </div>
@@ -137,16 +139,15 @@
                     type:'POST',
                     data:{'text':text}
                 }).done( function(data) {
-                    $('#message').before('<div class="mycomment"><p>' + data + '</p></div>');
+                    $('#message').after('<div class="chat-area"><div class="chat-hukidashi">' + data + '</div></div>');
                     console.log(data);
                     $('#messageText').val('');
+                    $('#target').scrollTop(0);
                 }).fail( function(data) {
                     $('.result').html(data);
                     console.log(data);
                 }).always( (data) => {
                 });
-
-                $('#target').animate({scrollTop: $('#target')[0].scrollHeight}, 'fast');
             })
         });
     </script>
