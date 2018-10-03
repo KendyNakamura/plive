@@ -2,6 +2,7 @@
 .line-bc {
     border: black solid 1px;
     max-height: 300px;
+    height: 300px;
     overflow: scroll;
 }
 .chat-box {
