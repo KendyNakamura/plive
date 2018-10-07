@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Http\Model\Artist');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Http\Model\Message');
+    }
 }

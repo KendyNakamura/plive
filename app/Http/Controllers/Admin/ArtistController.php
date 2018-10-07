@@ -99,13 +99,6 @@ class ArtistController extends Controller
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.updated'));
     }
 
-//    public function liveUpdate(LiveRequest $request, Live $live)
-//    {
-//        $live->fill($request->all())->save();
-//
-//        return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.save'));
-//    }
-
     public function livesUpdate(LiveRequest $request, Artist $artist)
     {
         $lives = Live::all()->where('artist_id', $artist->id);
