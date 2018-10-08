@@ -13,9 +13,14 @@ return [
     'delete?' => '削除しますか？',
     'edit' => '編集',
     'send' => '送信',
+    'name' => '名前',
 
     // 登録
     'register' => '登録する',
     'register_release' => '登録解除',
     'registered' => '登録しました。',
+
+    // Artist
+    'to_artist_page' => 'アーティストページへ',
+    'homepage' => 'ホームページ',
 ];

@@ -25,7 +25,7 @@
                         @endif
                     @endif
                     <p>登録者数　<span>{{ $artist->users()->count() }}</span></p>
-                    <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a></p>
+                    <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>@lang('c.to_artist_page')</a></p>
                 </div>
             </div>
         </div>

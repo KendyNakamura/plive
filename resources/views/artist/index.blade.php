@@ -10,10 +10,10 @@
                     <thead>
                     <tr>
                         <th>
-                            name
+                            @lang('c.name')
                         </th>
                         <th>
-                            ホームページ
+                            @lang('c.homepage')
                         </th>
                     </tr>
                     </thead>
@@ -26,7 +26,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>アーティストページへ</a>
+                                <a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>@lang('c.to_artist_page')</a>
                             </td>
                         </tr>
                     @endforeach
