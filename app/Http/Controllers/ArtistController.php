@@ -34,13 +34,13 @@ class ArtistController extends Controller
     {
         $artist->users()->attach($request->register);
 
-        return redirect(route('artist.show', $artist));
+        return $artist->users()->count();
     }
 
     public function registerDelete(Request $request, Artist $artist)
     {
         $artist->users()->detach($request->delete);
 
-        return redirect(route('artist.show', $artist));
+        return $artist->users()->count();
     }
 }

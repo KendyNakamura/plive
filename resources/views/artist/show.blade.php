@@ -24,7 +24,7 @@
                             <a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>
                         @endif
                     @endif
-                    <p>登録者数　<span>{{ $artist->users()->count() }}</span></p>
+                    <p>登録者数　<span id="userCount">{{ $artist->users()->count() }}</span></p>
                     <p><a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>@lang('c.to_artist_page')</a></p>
                 </div>
             </div>
@@ -112,6 +112,7 @@
                 }).done( (data) => {
                     $('#artistRegister').after('<a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>');
                     $('#artistRegister').remove();
+                    $('#userCount').text(data);
                 }).fail( (data) => {
                     $('.result').html(data);
                     console.log(data);
@@ -131,6 +132,7 @@
                 }).done( (data) => {
                     $('#artistDelete').after('<a href="javascript:void(0)" id="artistRegister"><i class="far fa-heart"></i>@lang('c.register')</a>');
                     $('#artistDelete').remove();
+                    $('#userCount').text(data);
                 }).fail( (data) => {
                     $('.result').html(data);
                     console.log(data);
@@ -150,7 +152,7 @@
                     type:'POST',
                     data:{'text':text}
                 }).done( function(data) {
-                    $('#messageBox').prepend('<div class="chat-box"><div class="chat-face"><img src="{{ asset('storage/images/no.jpg') }}" alt="my-img" width="40" height="40"></div><div class="chat-area"><div class="chat-hukidashi">' + data + '</div><div class="chat-name">@guest ""; @else Auth::user()->name; @endguest</div></div></div>');
+                    $('#messageBox').prepend('<div class="chat-box"><div class="chat-face"><img src="{{ asset('storage/images/no.jpg') }}" alt="my-img" width="40" height="40"></div><div class="chat-area"><div class="chat-hukidashi">' + data + '</div><div class="chat-name">@guest ""; @else {{ Auth::user()->name }} @endguest</div></div></div>');
                     console.log(data);
                     $('#messageText').val('');
                     $('#target').scrollTop(0);
