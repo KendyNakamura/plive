@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LiveTest extends DuskTestCase
 {
-    use DatabaseMigrations;
+//    use DatabaseMigrations;
     /**
      * A Dusk test example.
      *

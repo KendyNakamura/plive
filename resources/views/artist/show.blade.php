@@ -51,25 +51,36 @@
                 <div class="box-body">
                     <h2>Message</h2>
                     <div class="line-bc" id="target">
-                        <div id="message"></div>
+                        <div id="messageBox">
+                        </div>
                         @foreach($messages->sortByDesc('created_at') as $message)
                             {{--if this artist--}}
                             @if($message->to_artist_id == $artist->id)
                                 {{--if message user = me--}}
                                 <div class="chat-box">
                                     @if(Auth::user() && $message->user == Auth::user())
+                                        <div class="chat-face">
+                                            <img src="{{ asset('storage/images/no.jpg') }}" alt="my-img" width="40" height="40"><br/>
+                                        </div>
                                         <div class="chat-area">
                                             <div class="chat-hukidashi">
                                                 {{ $message->text }}
                                             </div>
+                                            <div class="chat-name">
+                                                {{ $message->user->name }}
+                                            </div>
                                         </div>
                                     @else
                                         <div class="chat-face">
-                                            <img src="{{ asset('storage/images/no.jpg') }}" alt="your-img" width="90" height="90">
+                                            <img src="{{ asset('storage/images/no.jpg') }}" alt="your-img" width="40" height="40">
+                                            {{ $message->user->name }}<br/>
                                         </div>
                                         <div class="chat-area">
                                             <div class="chat-hukidashi someone">
                                                 {{ $message->text }}
+                                            </div>
+                                            <div class="chat-name">
+                                                {{ $message->user->name }}
                                             </div>
                                         </div>
                                     @endif
@@ -139,7 +150,7 @@
                     type:'POST',
                     data:{'text':text}
                 }).done( function(data) {
-                    $('#message').after('<div class="chat-area"><div class="chat-hukidashi">' + data + '</div></div>');
+                    $('#messageBox').prepend('<div class="chat-box"><div class="chat-face"><img src="{{ asset('storage/images/no.jpg') }}" alt="my-img" width="40" height="40"></div><div class="chat-area"><div class="chat-hukidashi">' + data + '</div><div class="chat-name">@guest ""; @else Auth::user()->name; @endguest</div></div></div>');
                     console.log(data);
                     $('#messageText').val('');
                     $('#target').scrollTop(0);
