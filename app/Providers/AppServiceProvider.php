@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \Blade::directive('addtimestamp', function ($expression) {
+            $path = public_path($expression);
+
+            try {
+                $timestamp = \File::lastModified($path);
+            } catch (\Exception $e) {
+                $timestamp = Carbon::now()->timestamp;
+                report($e);
+            }
+
+            return asset($expression) . '?v=' . $timestamp;
+        });
     }
 
     /**

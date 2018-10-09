@@ -23,26 +23,28 @@ class ArtistRegisterTest extends DuskTestCase
 //        ログインしていない場合、登録ボタンがない
         $this->browse(function (Browser $browser) use ($artist) {
             $browser->visit('/artist/' . $artist->id)
-                    ->assertDontSee('登録する');
+                ->assertDontSee('登録する');
         });
 
         $user = factory(User::class)->create();
 
 //        ログイン後、登録ボタンが現れる。登録後に登録解除に変わる
         $this->browse(function ($browser) use ($user, $artist) {
-            $browser->script('window.scrollTo(0, 400);');
-            $browser->visit('/login')
+            $browser->maximize()
+                ->visit('/login')
                 ->type('email', $user->email)
                 ->type('password', 'secret')
                 ->press('Login')
                 ->assertPathIs('/')
-                ->visit('/artist/' . $artist->id)
-                ->click('#artistRegister')
+                ->visit('/artist/' . $artist->id);
+            $browser->script("window.scrollTo(0, 200);");
+            $browser->click('#artistRegister')
                 ->waitForText(__('c.register_release'))
                 ->visit('/profile')
                 ->assertSee($user->artists->where('id', $user->id)->first()->name)
-                ->visit('/artist/' . $artist->id)
-                ->click('#artistDelete')
+                ->visit('/artist/' . $artist->id);
+            $browser->script("window.scrollTo(0, 200);");
+            $browser->click('#artistDelete')
                 ->waitForText(__('c.register'))
                 ->visit('/profile')
                 ->assertDontSee($user->artists->where('id', $user->id)->first()->name);

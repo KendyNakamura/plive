@@ -1,84 +1,88 @@
+/* チャットレイアウト */
 .line-bc {
-    padding: 20px 10px;
-    max-width: 450px;
-    margin: 15px auto;
-    text-align: right;
-    font-size: 14px;
-    background: #7da4cd;
+    border: black solid 1px;
+    max-height: 300px;
+    height: 300px;
+    overflow: scroll;
 }
 
-.balloon6 {
-    width: 100%;
-    margin: 10px 0;
-    overflow: hidden;
+.chat-box {
 }
 
-.balloon6 .faceicon {
-    float: left;
-    margin-right: -50px;
-    width: 40px;
-}
-
-.balloon6 .faceicon img{
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
-.balloon6 .chatting {
-    width: 100%;
-    text-align: left;
-}
-.says {
+.chat-face {
     display: inline-block;
-    position: relative;
-    margin: 0 0 0 50px;
-    padding: 10px;
-    max-width: 250px;
-    border-radius: 12px;
-    background: #edf1ee;
+    vertical-align: top;
+    margin-top:10px;
 }
 
-.says:after {
-    content: "";
+.chat-area {
     display: inline-block;
-    position: absolute;
-    top: 3px;
-    left: -19px;
-    border: 8px solid transparent;
-    border-right: 18px solid #edf1ee;
-    -ms-transform: rotate(35deg);
-    -webkit-transform: rotate(35deg);
-    transform: rotate(35deg);
-}
-.says p {
-    margin: 0;
-    padding: 0;
 }
 
-/*以下、③右側の緑コメント*/
-.mycomment {
-    margin: 10px 0;
+.chat-hukidashi {
+    word-break:break-all;
+    max-width: 500px;
+    display: block; /*コメントの文字数に合わせて可変*/
+    padding: 5px 10px;
+    margin-left: 10px;
+    margin-top: 8px;
+    /* border: 1px solid gray; ←削除 */
+    border-radius: 10px;
+    position: relative; /*追記*/
+    background-color: #D9F0FF; /*追記*/
 }
 
-.mycomment p{
-    display: inline-block;
-    position: relative;
-    margin: 0 10px 0 0;
-    padding: 8px;
-    max-width: 250px;
-    border-radius: 12px;
-    background: #30e852;
-    font-size: 15px;
+.chat-name {
+    margin-left:10px;
 }
 
-.mycomment p:after {
-    content: "";
-    position: absolute;
-    top: 3px;
-    right: -19px;
-    border: 8px solid transparent;
-    border-left: 18px solid #30e852;
-    -ms-transform: rotate(-35deg);
-    -webkit-transform: rotate(-35deg);
-    transform: rotate(-35deg);
+/*.chat-box {*/
+/*width: 100%;*/
+/*height: 60px;*/
+/*overflow: hidden; !*floatの解除*!*/
+/*margin-bottom: 20px;*/
+/*}*/
+/*.chat-face {*/
+/*float: left;*/
+/*margin-right: -120px;*/
+/*}*/
+/*.chat-face img{*/
+/*border-radius: 30px;*/
+/*border: 1px solid #ccc;*/
+/*box-shadow: 0 0 4px #ddd;*/
+/*}*/
+/*.chat-area {*/
+/*width: 100%;*/
+/*float: right;*/
+/*}*/
+/*.chat-hukidashi {*/
+/*word-break:break-all;*/
+/*max-width: 500px;*/
+/*display: inline-block; !*コメントの文字数に合わせて可変*!*/
+/*padding: 5px 10px;*/
+/*margin-left: 120px;*/
+/*margin-top: 8px;*/
+/*!* border: 1px solid gray; ←削除 *!*/
+/*border-radius: 10px;*/
+/*position: relative; !*追記*!*/
+/*background-color: #D9F0FF; !*追記*!*/
+/*}*/
+
+/*.chat-hukidashi:after {*/
+/*content: "";*/
+/*position: absolute;*/
+/*top: 50%; left: -10px;*/
+/*margin-top: -10px;*/
+/*display: block;*/
+/*width: 0;*/
+/*height: 0;*/
+/*border-style: solid;*/
+/*border-width: 10px 10px 10px 0;*/
+/*border-color: transparent #D9F0FF transparent transparent;*/
+/*}*/
+.someone {
+background-color: #BCF5A9;
+}
+.someone:after {
+border-color: transparent #BCF5A9 transparent transparent;
 }
