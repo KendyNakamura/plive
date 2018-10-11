@@ -80,8 +80,8 @@ class Kernel extends ConsoleKernel
                     $live->save();
                 }
             }
-//        })->dailyAt('3:00');
-        });
+        })->dailyAt('3:00');
+//        });
     }
 
     /**
