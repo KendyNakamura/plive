@@ -48,7 +48,7 @@ class Live extends Model
         });
     }
 
-    public static function crawlerPreview($request)
+    public static function crawlerPreview(Request $request)
     {
         $client = new Client();
         $crawler = $client->request('GET', $request->url);
