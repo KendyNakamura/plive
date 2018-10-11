@@ -14,11 +14,10 @@
         <div class="col-12 text-center">
             <div class="box box-solid">
                 <div class="box-body">
-                    <img class="logo" src="{{ $artist->img_url }}" alt="logo" width="300px" height="300px">
                     <h2>{{ $artist->name }}</h2>
                     @if (Auth::user())
                         <input id="artistId" type="hidden" name="register" value="{{ Auth::user()->id ?? ''}}">
-                        @if ($artist->artist_register == '[]')
+                        @if (is_null($artist->artist_register))
                             <a href="javascript:void(0)" id="artistRegister"><i class="far fa-heart"></i>@lang('c.register')</a>
                         @else
                             <a href="javascript:void(0)" id="artistDelete"><i class="fa fa-heart"></i>@lang('c.register_release')</a>
@@ -73,7 +72,6 @@
                                     @else
                                         <div class="chat-face">
                                             <img src="{{ asset('storage/images/no.jpg') }}" alt="your-img" width="40" height="40">
-                                            {{ $message->user->name }}<br/>
                                         </div>
                                         <div class="chat-area">
                                             <div class="chat-hukidashi someone">
@@ -88,8 +86,14 @@
                             @endif
                         @endforeach
                     </div>
-                    <input name="text" type="text" class="form-control" id="messageText">
-                    <button id="messagePost" class="btn btn-success">@lang('c.send')</button>
+                    @guest
+                        <a class="btn btn-primary" href="{{ route('login') }}">{{ __('c.login') }}</a>
+                        <a class="btn btn-success" href="{{ route('register') }}">{{ __('c.register') }}</a>
+                        <p>ログイン後にメッセージを送ることができるようになります。</p>
+                    @else
+                        <input name="text" type="text" class="form-control" id="messageText">
+                        <button id="messagePost" class="btn btn-success">@lang('c.send')</button>
+                    @endguest
                 </div>
             </div>
         </div>

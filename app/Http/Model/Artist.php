@@ -69,6 +69,6 @@ class Artist extends Model
     // アーティストを登録しているかどうか
     public function getArtistRegisterAttribute()
     {
-        return $this->users()->get()->where('id', Auth::user()->id);
+        return $this->users()->get()->where('id', Auth::user()->id)->first();
     }
 }
