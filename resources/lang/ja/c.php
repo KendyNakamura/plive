@@ -14,6 +14,9 @@ return [
     'edit' => '編集',
     'send' => '送信',
     'name' => '名前',
+    'login' => 'ログイン',
+    'logout' => 'ログアウト',
+    'register' => '新規登録',
 
     // 登録
     'register' => '登録する',
