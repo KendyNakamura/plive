@@ -50,6 +50,11 @@ class Kernel extends ConsoleKernel
                     } else {
                         return 'titleセレクタが有効ではありません<br/>';
                     }
+
+                    $live->artist_id = $artist->id;
+
+                    $live->is_active = 0;
+
                     if (empty($artist->lives->where('date', $live->date)->first()) && empty($artist->lives->where('title', $live->title)->first())) {
                         $live->save();
                     }
@@ -70,18 +75,16 @@ class Kernel extends ConsoleKernel
 //                        }
 //                    }
 
-            $today = preg_replace('/\./', '', Carbon::today()->format('Y.m.d'));
-            foreach(Live::all() as $live)
-            {
-                $date = $live->date ? preg_replace('/\./', '', $live->date) : 0;
-                if($date - $today < 0)
-                {
-                    $live->is_active = 0;
-                    $live->save();
+                $today = preg_replace('/\./', '', Carbon::today()->format('Y.m.d'));
+                foreach (Live::all() as $live) {
+                    $date = $live->date ? preg_replace('/\./', '', $live->date) : 0;
+                    if ($date - $today < 0) {
+                        $live->is_active = 0;
+                        $live->save();
+                    }
                 }
-            }
-        })->dailyAt('3:00');
-//        });
+//        })->dailyAt('3:00');
+        });
     }
 
     /**
