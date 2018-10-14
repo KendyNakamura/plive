@@ -2,6 +2,7 @@
 
 namespace App\Http\Model;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Goutte\Client;
 

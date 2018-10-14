@@ -32,57 +32,49 @@ class Kernel extends ConsoleKernel
             $client = new Client();
             $artists = Artist::all();
             foreach ($artists as $artist) {
-                $crawler = $client->request('GET', $artist->url);
-                $crawler->filter($artist->selector)->each(function ($li) use ($artist) {
-                    $live = new Live;
-                    if ($artist->date_selector && count($li->filter($artist->date_selector))) {
-                        $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
-                        $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
-                        $live->date = $d;
-                    } else {
-                        return 'dateセレクタが有効ではありません<br/>';
-                    }
+                try {
+                    $crawler = $client->request('GET', $artist->url);
+                    $crawler->filter($artist->selector)->each(function ($li) use ($artist) {
+                        $live = new Live;
+                        if ($artist->date_selector && count($li->filter($artist->date_selector))) {
+                            $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
+                            $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
+                            $live->date = $d;
+                        } else {
+                            return 'dateセレクタが有効ではありません<br/>';
+                        }
 
-                    if($artist->title_selector && count($li->filter($artist->title_selector))){
-                        $title = preg_replace("/ |　/", "", $li->filter($artist->title_selector)->text());
-                        $t = preg_replace("/.+\..+\(.+\)/", "", $title);
-                        $live->title = $t;
-                    } else {
-                        return 'titleセレクタが有効ではありません<br/>';
-                    }
+                        if ($artist->title_selector && count($li->filter($artist->title_selector))) {
+                            $title = preg_replace("/ |　/", "", $li->filter($artist->title_selector)->text());
+                            $t = preg_replace("/.+\..+\(.+\)/", "", $title);
+                            $live->title = $t;
+                        } else {
+                            return 'titleセレクタが有効ではありません<br/>';
+                        }
 
-                    $live->artist_id = $artist->id;
+                        $live->artist_id = $artist->id;
 
-                    $live->is_active = 0;
+                        $live->is_active = 0;
 
-                    if (empty($artist->lives->where('date', $live->date)->first()) && empty($artist->lives->where('title', $live->title)->first())) {
-                        $live->save();
-                    }
-                });
+                        if (empty($artist->lives->where('date', $live->date)->first()) && empty($artist->lives->where('title', $live->title)->first())) {
+                            $live->save();
+                        }
+                    });
+                } catch(\Exception $e){
+                    throw $e;
+                }
             };
-//                    if ($li) {
-//                        $live = new Live;
-//                        $title = preg_replace("/ |　/", "", $li->filter($artist->title_selector)->text());
-//                        $live->title = preg_replace("/.+\..+\(.+\)/", "", $title);
-//                        $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
-//                        $date2 = preg_replace("/(\s+|\n|\r|\r\n)/", "", $date);
-//                        preg_match("/\d+\.\d+\.\d+/", $date2,$date3 );
-//                        $live->date = $date3[0] ?? "";
-//                        $live->artist_id = $artist->id;
-//                        $live->is_active = 0;
-//                        if (empty($artist->lives->where('date', $live->date)->first()) && empty($artist->lives->where('title', $live->title)->first())) {
-//                            $live->save();
-//                        }
-//                    }
 
-                $today = preg_replace('/\./', '', Carbon::today()->format('Y.m.d'));
-                foreach (Live::all() as $live) {
-                    $date = $live->date ? preg_replace('/\./', '', $live->date) : 0;
+            $today = preg_replace('/\./', '', Carbon::today()->format('Y.m.d'));
+            foreach (Live::all() as $live) {
+                $date = $live->date ? preg_replace('/\./', '', $live->date) : 0;
+                if(is_numeric($date)) {
                     if ($date - $today < 0) {
                         $live->is_active = 0;
                         $live->save();
                     }
                 }
+            }
 //        })->dailyAt('3:00');
         });
     }
