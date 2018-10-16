@@ -54,7 +54,7 @@ class Kernel extends ConsoleKernel
 
                         $live->artist_id = $artist->id;
 
-                        $live->is_active = 0;
+                        $live->is_active = 1;
 
                         if (empty($artist->lives->where('date', $live->date)->first()) && empty($artist->lives->where('title', $live->title)->first())) {
                             $live->save();
