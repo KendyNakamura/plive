@@ -8,7 +8,6 @@ class Tag extends Model
 {
     protected $fillable = [
         'title',
-        'text',
     ];
 
     public function artists()

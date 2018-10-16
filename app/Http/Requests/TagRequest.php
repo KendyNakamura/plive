@@ -25,7 +25,6 @@ class TagRequest extends FormRequest
     {
         return [
             'title' => 'max:32|unique:tags|required',
-            'text' => 'nullable|max:100',
         ];
     }
 

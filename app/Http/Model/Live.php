@@ -58,7 +58,7 @@ class Live extends Model
             if ($request->date_selector && count($li->filter($request->date_selector))) {
                 $date = preg_replace("/\//", ".", $li->filter($request->date_selector)->text());
                 preg_match("/\d{8}/", preg_replace("/[^0-9]/u", "", $date), $d);
-                echo $d[0] ?? '日付指定なし'. '<br/>';
+                echo $d[0]. '<br/>' ?? '日付指定なし'. '<br/>';
 //                echo $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date). '<br/>';
             } else {
                 echo 'dateセレクタが有効ではありません<br/>';

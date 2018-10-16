@@ -87,8 +87,8 @@
                         @endforeach
                     </div>
                     @guest
-                        <a class="btn btn-primary" href="{{ route('login') }}">{{ __('c.login') }}</a>
-                        <a class="btn btn-success" href="{{ route('register') }}">{{ __('c.register') }}</a>
+                        <a href="{{ route('login') }}">{{ __('c.login') }}</a>or
+                        <a href="{{ route('register') }}">{{ __('c.register') }}</a>
                         <p>ログイン後にメッセージを送ることができるようになります。</p>
                     @else
                         <input name="text" type="text" class="form-control" id="messageText">

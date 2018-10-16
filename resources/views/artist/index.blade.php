@@ -6,32 +6,15 @@
     <div class="row">
         <div class="col-md-12">
             {{ Breadcrumbs::render('Home') }}
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>
-                            @lang('c.name')
-                        </th>
-                        <th>
-                            @lang('c.homepage')
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
                     @foreach($artists as $artist)
-                        <tr>
-                            <td>
+                        <ul>
+                            <li>
                                 <a href="{{ route('artist.show', $artist) }}">
                                     {{ $artist->name }}
                                 </a>
-                            </td>
-                            <td>
-                                <a href="{{ $artist->url }}" target="_blank"><i class="fa fa-clone"></i>@lang('c.to_artist_page')</a>
-                            </td>
-                        </tr>
+                            </li>
+                        </ul>
                     @endforeach
-                    </tbody>
-                </table>
             <div class="mt-3">
                 {{ $artists->links() }}
             </div>

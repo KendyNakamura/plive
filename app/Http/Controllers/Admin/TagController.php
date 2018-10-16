@@ -75,7 +75,7 @@ class TagController extends Controller
     public function update(TagRequest $request, Tag $tag)
     {
         $tag->fill($request->all())->save();
-        return redirect(route('admin::tag.update', $tag))->with('result', __('c.saved'));
+        return redirect(route('admin::tag.index'))->with('result', __('c.saved'));
     }
 
     /**
