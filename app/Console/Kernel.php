@@ -38,10 +38,16 @@ class Kernel extends ConsoleKernel
                         $live = new Live;
                         if ($artist->date_selector && count($li->filter($artist->date_selector))) {
                             $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
-                            $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
-                            $live->date = $d;
+                            $d1 = preg_match("/\d{8}/", preg_replace("/[^0-9]/u", "", $date), $d);
+//                            $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
+                            if($d) {
+                                $live->date = $d[0];
+                            } else {
+                                $live->date = 2018;
+                                echo $artist->name. "修正あり\n";
+                            }
                         } else {
-                            return 'dateセレクタが有効ではありません<br/>';
+                            return "dateセレクタが有効ではありません\n";
                         }
 
                         if ($artist->title_selector && count($li->filter($artist->title_selector))) {
@@ -49,7 +55,7 @@ class Kernel extends ConsoleKernel
                             $t = preg_replace("/.+\..+\(.+\)/", "", $title);
                             $live->title = $t;
                         } else {
-                            return 'titleセレクタが有効ではありません<br/>';
+                            return "titleセレクタが有効ではありません\n";
                         }
 
                         $live->artist_id = $artist->id;
@@ -67,9 +73,8 @@ class Kernel extends ConsoleKernel
 
             $today = preg_replace('/\./', '', Carbon::today()->format('Y.m.d'));
             foreach (Live::all() as $live) {
-                $date = $live->date ? preg_replace('/\./', '', $live->date) : 0;
-                if(is_numeric($date)) {
-                    if ($date - $today < 0) {
+                if(is_numeric($live->date)) {
+                    if ($live->date - $today < 0) {
                         $live->is_active = 0;
                         $live->save();
                     }
