@@ -38,8 +38,7 @@ class Kernel extends ConsoleKernel
                         $live = new Live;
                         if ($artist->date_selector && count($li->filter($artist->date_selector))) {
                             $date = preg_replace("/\//", ".", $li->filter($artist->date_selector)->text());
-                            $d1 = preg_match("/\d{8}/", preg_replace("/[^0-9]/u", "", $date), $d);
-//                            $d = preg_replace("/(\s+|\n|\r|\r\n|開催|\(.+\))/", "", $date);
+                            preg_match("/\d{8}/", preg_replace("/[^0-9]/u", "", $date), $d);
                             if($d) {
                                 $live->date = $d[0];
                             } else {
@@ -80,7 +79,6 @@ class Kernel extends ConsoleKernel
                     }
                 }
             }
-//        })->dailyAt('3:00');
         });
     }
 

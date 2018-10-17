@@ -26,4 +26,5 @@ return [
     // Artist
     'to_artist_page' => 'アーティストページへ',
     'homepage' => 'ホームページ',
+    'tag' => 'タグ',
 ];
