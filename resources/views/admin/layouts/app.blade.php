@@ -462,6 +462,17 @@ desired effect
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(function() {
+        FastClick.attach(document.body);
+    });
+</script>
 @yield('page_assets_end_body_tag')
 </body>
 </html>

@@ -40,6 +40,7 @@ Route::namespace('Admin')->name('admin::')->prefix('admin')->group(function () {
     // Live
     Route::post('live/{live}', 'ArtistController@liveUpdate')->name('live.update');
     Route::post('live/update/{artist}', 'ArtistController@livesUpdate')->name('lives.update');
+    Route::post('live/delete/{live}', 'ArtistController@liveDelete')->name('live.delete');
 
     // Place
     Route::get('place', 'PlaceController@index')->name('place.index');

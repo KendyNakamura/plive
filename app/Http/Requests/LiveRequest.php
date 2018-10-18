@@ -25,7 +25,7 @@ class LiveRequest extends FormRequest
     {
         return [
             'title.*' => 'required|max:100',
-            'date.*' => 'nullable|regex:/\d{4}.\d{2}.\d{2}/',
+            'date.*' => 'nullable|integer',
             'place_id.*' => 'nullable|integer|exists:places,id',
             'is_active.*' => 'required|boolean',
         ];

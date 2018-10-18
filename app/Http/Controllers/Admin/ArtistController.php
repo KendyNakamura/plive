@@ -112,4 +112,10 @@ class ArtistController extends Controller
         }
         return redirect(route('admin::artist.edit', $artist))->with('result', __('c.saved'));
     }
+
+    public function liveDelete(Request $request, Live $live)
+    {
+        $live->delete();
+        return redirect(route('admin::artist.edit', $live->artist))->with('result', __('c.deleted'));
+    }
 }
