@@ -41,9 +41,9 @@ class Kernel extends ConsoleKernel
                             preg_match("/\d{8}/", preg_replace("/[^0-9]/u", "", $date), $d);
                             if($d) {
                                 $live->date = $d[0];
-                            } else {
-                                $live->date = 2018;
-                                echo $artist->name. "修正あり\n";
+//                            } else {
+//                                $live->date = 2018;
+//                                echo $artist->name. "修正あり\n";
                             }
                         } else {
                             return "dateセレクタが有効ではありません\n";
